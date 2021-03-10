@@ -1,5 +1,7 @@
 package com.example.demo.dto;
 
+import com.example.demo.entities.Event;
+
 public class EventDTO {
     
     private Long id;
@@ -20,6 +22,14 @@ public class EventDTO {
         setEmail(email);
     }
 
+
+    public EventDTO(Event event) {
+
+        setId(event.getId());
+        setName(event.getName());
+        setAddress(event.getAddress());
+        setEmail(event.getEmail());
+    }
 
     public Long getId() {
         return id;
