@@ -10,10 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.dto.InsertEventDTO;
+
 
 @Entity
 @Table(name="TB_EVENT")
-public class Event implements Serializable{
+public class Event implements Serializable {
     
     private static final long serialVersionUID = 1L;
 
@@ -31,6 +33,16 @@ public class Event implements Serializable{
     private LocalTime startTime;
     private LocalTime endTime;
 
+    public Event(){
+        
+    }
+
+    public Event(InsertEventDTO insertDTO) {
+        this.address = insertDTO.getAddress();
+        this.name = insertDTO.getName();
+        this.description = insertDTO.getDescricao();
+        this.email = insertDTO.getEmail();
+    }
 
     public Long getId() {
         return id;
@@ -109,11 +121,7 @@ public class Event implements Serializable{
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((address == null) ? 0 : address.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((email == null) ? 0 : email.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
         return result;
     }
 
@@ -126,33 +134,15 @@ public class Event implements Serializable{
         if (getClass() != obj.getClass())
             return false;
         Event other = (Event) obj;
-        if (address == null) {
-            if (other.address != null)
-                return false;
-        } else if (!address.equals(other.address))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (email == null) {
-            if (other.email != null)
-                return false;
-        } else if (!email.equals(other.email))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
         return true;
     }
+
+    
 
 
     

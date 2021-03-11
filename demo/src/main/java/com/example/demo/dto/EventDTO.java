@@ -14,7 +14,6 @@ public class EventDTO {
     
     }
 
-    
     public EventDTO(Long id, String name, String address, String email) {
         setId(id);
         setName(name);
