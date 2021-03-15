@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
+import com.example.demo.dto.UpdateEventDTO;
 import com.example.demo.service.EventService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,4 +60,11 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<EventDTO> update(@RequestBody UpdateEventDTO updateDTO, @PathVariable Long id){
+
+        EventDTO dto = service.update(id, updateDTO);
+        return ResponseEntity.ok().body(dto);
+    }
+ 
 }
