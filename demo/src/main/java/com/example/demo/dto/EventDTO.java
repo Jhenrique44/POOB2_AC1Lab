@@ -19,6 +19,7 @@ public class EventDTO {
         setName(name);
         setAddress(address);
         setEmail(email);
+        
     }
 
 

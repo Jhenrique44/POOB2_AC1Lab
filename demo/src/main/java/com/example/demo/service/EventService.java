@@ -14,6 +14,8 @@ import com.example.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -25,11 +27,11 @@ public class EventService {
     private EventRepository repo;
 
     //Pegando todos os eventos cadatrados na lista 
-    public List<EventDTO> getEvents(){
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address){
 
-        List<Event> list = repo.findAll(); //usando recurso jpa para pegar todos os eventos. 
+        Page<Event> list = repo.find(pageRequest, name, address); //usando recurso jpa para pegar todos os eventos. 
         
-        return toDTOList(list);
+        return list.map(c -> new EventDTO(c));
 
     }
     public EventDTO getEventById(Long id){
@@ -71,6 +73,28 @@ public class EventService {
 
 
     }
+
+    // public EventDTO updata(Long id, UpdataDTO updataDTO){
+
+    //     try {
+    //         Event event =  repo.getOne(id);
+    //         event.setStartDate(updataDTO.getStartDate());
+    //         event.setEndDate(updataDTO.getEndDate());
+    //         event.setStartTime(updataDTO.getStartTime());
+    //         event.setEndTime(updataDTO.getEndTime());
+    //         event = repo.save(event);
+            
+    //         return new EventDTO(event);
+
+    //     } catch (EntityNotFoundException e) {
+            
+    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+    //     }catch(EmptyResultDataAccessException e){
+            
+    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data invalida");
+    //     }
+
+    // }
 
     private List<EventDTO> toDTOList(List<Event> list){
 
