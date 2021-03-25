@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,10 +27,10 @@ public class EventService {
     @Autowired 
     private EventRepository repo;
 
-    //Pegando todos os eventos cadatrados na lista 
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address){
+    //Pegando todos os eventos cadatrados na lista, agora paginada, passando filtros
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, LocalDate startDate, String description){
 
-        Page<Event> list = repo.find(pageRequest, name, address); //usando recurso jpa para pegar todos os eventos. 
+        Page<Event> list = repo.find(pageRequest, name, address, startDate, description);  
         
         return list.map(c -> new EventDTO(c));
 
@@ -64,15 +65,23 @@ public class EventService {
             Event event = repo.getOne(id);
             event.setAddress(updateDTO.getAddress());
             event.setEmail(updateDTO.getEmail());
+
+            event.setStartDate(updateDTO.getStartDate());
+            event.setEndDate(updateDTO.getEndDate());
+            event.setStartTime(updateDTO.getStartTime());
+            event.setEndTime(updateDTO.getEndTime());
+
             event =  repo.save(event);
 
             return new EventDTO(event);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        // } catch (){
+        //     throw new ResponseStatusException(HttpStatus.)
+        // }
         }
-
-
     }
+}
 
     // public EventDTO updata(Long id, UpdataDTO updataDTO){
 
@@ -96,18 +105,17 @@ public class EventService {
 
     // }
 
-    private List<EventDTO> toDTOList(List<Event> list){
+    // private List<EventDTO> toDTOList(List<Event> list){
 
-        List<EventDTO> listDTO = new ArrayList<>();
+    //     List<EventDTO> listDTO = new ArrayList<>();
 
-        for(Event c : list){
+    //     for(Event c : list){
             
-            listDTO.add(new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getEmail()));
+    //         listDTO.add(new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getEmail()));
             
-        }
+    //     }
 
-        return listDTO;
+    //     return listDTO;
 
-    }
+    // }
 
-}

@@ -1,6 +1,10 @@
 package com.example.demo.dto;
 
+import java.time.LocalDate;
+
 import com.example.demo.entities.Event;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class EventDTO {
     
@@ -8,18 +12,23 @@ public class EventDTO {
     
     private String name;
     private String address;
-    private String email;
+    private String description;
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate startDate;
 
     public EventDTO(){
     
     }
 
-    public EventDTO(Long id, String name, String address, String email) {
+    public EventDTO(Long id, String name, String address, LocalDate startDate, String description) {
         setId(id);
         setName(name);
         setAddress(address);
-        setEmail(email);
-        
+        setStartDate(startDate);
+        setDescription(description);
+
+
     }
 
 
@@ -28,7 +37,8 @@ public class EventDTO {
         setId(event.getId());
         setName(event.getName());
         setAddress(event.getAddress());
-        setEmail(event.getEmail());
+        setStartDate(event.getStartDate());
+        setDescription(event.getDescription()); 
     }
 
     public Long getId() {
@@ -55,14 +65,21 @@ public class EventDTO {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     

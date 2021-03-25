@@ -8,9 +8,10 @@ public class UpdateEventDTO {
     private String address;
     private String email;
     
-    private LocalDate beginDate;
+   
+    private LocalDate startDate;
     private LocalDate endDate;
-    private LocalTime beginTime;
+    private LocalTime startTime;
     private LocalTime endTime;
 
 
@@ -27,11 +28,11 @@ public class UpdateEventDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-    public LocalDate getBeginDate() {
-        return beginDate;
+    public LocalDate getStartDate() {
+        return startDate;
     }
-    public void setBeginDate(LocalDate beginDate) {
-        this.beginDate = beginDate;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
     public LocalDate getEndDate() {
         return endDate;
@@ -39,11 +40,11 @@ public class UpdateEventDTO {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    public LocalTime getBeginTime() {
-        return beginTime;
+    public LocalTime getStartTime() {
+        return startTime;
     }
-    public void setBeginTime(LocalTime beginTime) {
-        this.beginTime = beginTime;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
     public LocalTime getEndTime() {
         return endTime;

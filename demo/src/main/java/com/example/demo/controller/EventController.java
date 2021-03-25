@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.example.demo.dto.EventDTO;
@@ -39,12 +40,14 @@ public class EventController {
         @RequestParam(value = "direction", defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
         @RequestParam(value = "name", defaultValue = "") String name,
-        @RequestParam(value = "address", defaultValue = "") String address
+        @RequestParam(value = "address", defaultValue = "") String address,
+        @RequestParam(value = "startDate", defaultValue = "") LocalDate startDate,
+        @RequestParam(value = "description", defaultValue = "") String description
 
     ){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         
-        Page <EventDTO> list = service.getEvents(pageRequest, name.trim(), address.trim());
+        Page <EventDTO> list = service.getEvents(pageRequest, name.trim(), address.trim(), startDate, description.trim());
         return ResponseEntity.ok().body(list);
         
     }
