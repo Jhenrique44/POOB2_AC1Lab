@@ -44,10 +44,16 @@ public class Event implements Serializable {
     }
 
     public Event(InsertEventDTO insertDTO) {
-        this.address = insertDTO.getAddress();
         this.name = insertDTO.getName();
+        this.address = insertDTO.getAddress();
         this.description = insertDTO.getDescricao();
         this.email = insertDTO.getEmail();
+
+        this.startDate = insertDTO.getStartDate();
+        this.endDate = insertDTO.getEndDate();
+        this.startTime = insertDTO.getStartTime();
+        this.endTime = insertDTO.getEndTime();
+
     }
 
     public Long getId() {
