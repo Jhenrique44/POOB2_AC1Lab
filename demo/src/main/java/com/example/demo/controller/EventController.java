@@ -51,6 +51,19 @@ public class EventController {
         return ResponseEntity.ok().body(list);
         
     }
+    @GetMapping("/date")
+    public ResponseEntity<Page<EventDTO>> getEventsByDate(
+        @RequestParam(value = "page", defaultValue = "0")Integer page,
+        @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
+        @RequestParam(value = "direction", defaultValue = "ASC") String direction,
+        @RequestParam(value = "orderBy", defaultValue = "id") String orderBy,
+        @RequestParam(value = "startDate", defaultValue = "") LocalDate starDate   
+    ){
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+
+        Page<EventDTO> list = service.getEventsByDate(pageRequest, starDate);
+        return ResponseEntity.ok().body(list);
+    }
 
     @GetMapping("{id}")
     public ResponseEntity<EventDTO> getEventById(@PathVariable Long id){
@@ -75,8 +88,7 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
-    //Update data
-    @PutMapping("/{id}/data")
+    @PutMapping("{id}")
     public ResponseEntity<EventDTO> update(@RequestBody UpdateEventDTO updateDTO, @PathVariable Long id){
 
         EventDTO dto = service.update(id, updateDTO);

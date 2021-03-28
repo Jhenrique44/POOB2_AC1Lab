@@ -35,6 +35,13 @@ public class EventService {
         return list.map(c -> new EventDTO(c));
 
     }
+    public Page<EventDTO> getEventsByDate(PageRequest pageRequest, LocalDate startDate){
+
+        Page<Event> list = repo.findByDate(pageRequest, startDate);
+        
+        return list.map(c ->  new EventDTO(c));
+
+    }
     public EventDTO getEventById(Long id){
 
         Optional<Event> op = repo.findById(id);
@@ -83,27 +90,6 @@ public class EventService {
     }
 }
 
-    // public EventDTO updata(Long id, UpdataDTO updataDTO){
-
-    //     try {
-    //         Event event =  repo.getOne(id);
-    //         event.setStartDate(updataDTO.getStartDate());
-    //         event.setEndDate(updataDTO.getEndDate());
-    //         event.setStartTime(updataDTO.getStartTime());
-    //         event.setEndTime(updataDTO.getEndTime());
-    //         event = repo.save(event);
-            
-    //         return new EventDTO(event);
-
-    //     } catch (EntityNotFoundException e) {
-            
-    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
-    //     }catch(EmptyResultDataAccessException e){
-            
-    //         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Data invalida");
-    //     }
-
-    // }
 
     // private List<EventDTO> toDTOList(List<Event> list){
 
