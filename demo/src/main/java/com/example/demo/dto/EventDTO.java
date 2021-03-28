@@ -22,11 +22,11 @@ public class EventDTO {
     }
 
     public EventDTO(Long id, String name, String address, LocalDate startDate, String description) {
-        setId(id);
-        setName(name);
-        setAddress(address);
-        setStartDate(startDate);
-        setDescription(description);
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.startDate = startDate;
+        this.description = description;
 
 
     }
@@ -34,11 +34,11 @@ public class EventDTO {
 
     public EventDTO(Event event) {
 
-        setId(event.getId());
-        setName(event.getName());
-        setAddress(event.getAddress());
-        setStartDate(event.getStartDate());
-        setDescription(event.getDescription()); 
+        this.id = event.getId();
+        this.name = event.getName();
+        this.address = event.getAddress();
+        this.startDate = event.getStartDate();
+        this.description = event.getDescription(); 
     }
 
     public Long getId() {

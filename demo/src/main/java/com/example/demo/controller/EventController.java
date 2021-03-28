@@ -2,7 +2,6 @@ package com.example.demo.controller;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.List;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
