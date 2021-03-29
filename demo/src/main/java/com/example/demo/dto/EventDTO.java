@@ -14,7 +14,7 @@ public class EventDTO {
     private String address;
     private String description;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate startDate;
 
     public EventDTO(){
