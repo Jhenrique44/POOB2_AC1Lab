@@ -39,6 +39,9 @@ public class Event implements Serializable {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    LocalDate dateToday;
+    LocalTime hourNow;
+    
     public Event(){
         
     }
@@ -102,7 +105,8 @@ public class Event implements Serializable {
     }
 
     public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+        if(startDate.isAfter(dateToday))
+            this.startDate = startDate;
     }
 
     public LocalDate getEndDate() {
@@ -118,7 +122,8 @@ public class Event implements Serializable {
     }
 
     public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+        if(startTime.isAfter(hourNow)) 
+            this.startTime = startTime;
     }
 
     public LocalTime getEndTime() {

@@ -38,13 +38,14 @@ public class EventController {
         @RequestParam(value = "direction",    defaultValue = "ASC") String direction,
         @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy,
         @RequestParam(value = "name",         defaultValue = "") String name,
-        @RequestParam(value = "address",         defaultValue = "") String address
+        @RequestParam(value = "address",      defaultValue = "") String address,
+        @RequestParam(value = "description",  defaultValue = "") String description 
 
 
     ) {
 
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
-        Page<EventDTO> list = service.getEvents(pageRequest, name, address);
+        Page<EventDTO> list = service.getEvents(pageRequest, name, address, description);
         return ResponseEntity.ok(list);
     }
     @GetMapping("{id}")

@@ -15,6 +15,8 @@ public class InsertEventDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     
+    LocalDate dateToday = LocalDate.now();
+    LocalTime timeNow = LocalTime.now();
     
     public String getName() {
         return name;
@@ -44,7 +46,8 @@ public class InsertEventDTO {
         return startDate;
     }
     public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+        if(startDate.isAfter(dateToday))
+            this.startDate = startDate;
     }
     public LocalDate getEndDate() {
         return endDate;
@@ -56,7 +59,8 @@ public class InsertEventDTO {
         return startTime;
     }
     public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+        if(startTime.isAfter(timeNow))
+            this.startTime = startTime;
     }
     public LocalTime getEndTime() {
         return endTime;
