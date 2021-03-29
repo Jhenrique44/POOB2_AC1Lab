@@ -28,9 +28,9 @@ public class EventService {
     private EventRepository repo;
 
     //Pegando todos os eventos cadatrados na lista, agora paginada, passando filtros
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, LocalDate startDate, String description){
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, String description){
 
-        Page<Event> list = repo.find(pageRequest, name, address, startDate, description);  
+        Page<Event> list = repo.find(pageRequest, name, address, description);  
         
         return list.map(c -> new EventDTO(c));
 
