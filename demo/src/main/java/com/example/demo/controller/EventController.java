@@ -47,10 +47,10 @@ public class EventController {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
         
         Page <EventDTO> list = service.getEvents(pageRequest, name.trim(), address.trim(), startDate, description.trim());
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok(list);
         
     }
-    @GetMapping("/date")
+    @GetMapping("/events/date")
     public ResponseEntity<Page<EventDTO>> getEventsByDate(
         @RequestParam(value = "page", defaultValue = "0")Integer page,
         @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
@@ -61,7 +61,7 @@ public class EventController {
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 
         Page<EventDTO> list = service.getEventsByDate(pageRequest, starDate);
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("{id}")
@@ -69,7 +69,7 @@ public class EventController {
 
         EventDTO dto = service.getEventById(id);
 
-        return ResponseEntity.ok().body(dto);
+        return ResponseEntity.ok(dto);
     }
     
     @PostMapping
