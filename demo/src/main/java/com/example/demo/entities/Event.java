@@ -114,7 +114,8 @@ public class Event implements Serializable {
     }
 
     public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+        if(endDate.isAfter(startDate))
+            this.endDate = endDate;
     }
 
     public LocalTime getStartTime() {
@@ -131,7 +132,8 @@ public class Event implements Serializable {
     }
 
     public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+        if(endTime.isAfter(startTime))
+            this.endTime = endTime;
     }
 
     @Override
