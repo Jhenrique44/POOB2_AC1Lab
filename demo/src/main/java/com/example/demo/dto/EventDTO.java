@@ -15,17 +15,16 @@ public class EventDTO {
     private String description;
 
     //@DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate startDate;
+    //private LocalDate startDate;
 
     public EventDTO(){
     
     }
 
-    public EventDTO(Long id, String name, String address, LocalDate startDate, String description) {
+    public EventDTO(Long id, String name, String address, String description) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.startDate = startDate;
         this.description = description;
 
 
@@ -37,7 +36,6 @@ public class EventDTO {
         this.id = event.getId();
         this.name = event.getName();
         this.address = event.getAddress();
-        this.startDate = event.getStartDate();
         this.description = event.getDescription(); 
     }
 
@@ -65,15 +63,15 @@ public class EventDTO {
         this.address = address;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+    // public LocalDate getStartDate() {
+    //     return startDate;
+    // }
 
-    public void setStartDate(LocalDate startDate) {
+    // public void setStartDate(LocalDate startDate) {
         
         
-        this.startDate = startDate;
-    }
+    //     this.startDate = startDate;
+    // }
 
     public String getDescription() {
         return description;

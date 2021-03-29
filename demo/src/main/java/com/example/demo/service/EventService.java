@@ -1,8 +1,7 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
-// import java.util.ArrayList;
-// import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -24,84 +23,69 @@ import org.springframework.web.server.ResponseStatusException;
 @Service
 public class EventService {
     
-    @Autowired 
+    @Autowired
     private EventRepository repo;
 
-    //Pegando todos os eventos cadatrados na lista, agora paginada, passando filtros
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, String description){
-
-        Page<Event> list = repo.find(pageRequest, name, address, description);  
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address){
         
-        return list.map(c -> new EventDTO(c));
-
+        Page<Event> list = repo.find(pageRequest, name, address);
+        return list.map( e -> new EventDTO(e) );
     }
-    public Page<EventDTO> getEventsByDate(PageRequest pageRequest, LocalDate startDate){
 
-        Page<Event> list = repo.findByDate(pageRequest, startDate);
-        
-        return list.map(c ->  new EventDTO(c));
-
-    }
     public EventDTO getEventById(Long id){
-
         Optional<Event> op = repo.findById(id);
-        Event event = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Event not found"));
+        Event event = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        
+        return new EventDTO(event);
 
-        return new EventDTO(event); 
     }
+    public EventDTO insert(InsertEventDTO insert){
 
-    public EventDTO insert(InsertEventDTO insertDTO){
-        Event entity = new Event(insertDTO);
+        Event entity = new Event(insert);
         entity = repo.save(entity);
         return new EventDTO(entity);
-
     }
-    public void delete(Long id){
 
+    public void delete(Long id){
+        
         try {
             repo.deleteById(id);
-            
+
         } catch (EmptyResultDataAccessException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
+
     }
 
     public EventDTO update(Long id, UpdateEventDTO updateDTO){
 
         try {
-            Event event = repo.getOne(id);
-            event.setAddress(updateDTO.getAddress());
-            event.setEmail(updateDTO.getEmail());
+            Event entity = repo.getOne(id);
+            entity.setAddress(updateDTO.getAddress());
+            entity.setEmail(updateDTO.getEmail());
+            entity.setStartDate(updateDTO.getStartDate());
+            entity.setEndDate(updateDTO.getEndDate());
+            entity.setStartTime(updateDTO.getStartTime());
+            entity.setEndTime(updateDTO.getEndTime());
 
-            event.setStartDate(updateDTO.getStartDate());
-            event.setEndDate(updateDTO.getEndDate());
-            event.setStartTime(updateDTO.getStartTime());
-            event.setEndTime(updateDTO.getEndTime());
+            entity = repo.save(entity);
 
-            event =  repo.save(event);
-
-            return new EventDTO(event);
-        } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
-        // } catch (){
-        //     throw new ResponseStatusException(HttpStatus.)
-        // }
-        }
+            return new EventDTO(entity);
+        } catch (EntityNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Event Not Found");
+        }        
     }
+    public List<EventDTO> toDTOList(List<Event> list) {
+
+        List<EventDTO> listDTO = new ArrayList<>();
+            
+        for (Event e: list){
+            EventDTO dto = new EventDTO(e.getId(), e.getName(), e.getAddress(), e.getDescription());
+            listDTO.add(dto);
+        }
+        return listDTO;
+
+    }
+
+    
 }
-
-
-    // private List<EventDTO> toDTOList(List<Event> list){
-
-    //     List<EventDTO> listDTO = new ArrayList<>();
-
-    //     for(Event c : list){
-            
-    //         listDTO.add(new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getEmail()));
-            
-    //     }
-
-    //     return listDTO;
-
-    // }
-
