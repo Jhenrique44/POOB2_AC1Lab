@@ -26,8 +26,8 @@ public class EventService {
     @Autowired
     private EventRepository repo;
 
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, String description) {
-        Page<Event> list = repo.find(pageRequest, name, address, description);
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, String desc) {
+        Page<Event> list = repo.find(pageRequest, name, address, desc);
         return list.map( c -> new EventDTO(c) );
     }
 
@@ -60,12 +60,13 @@ public class EventService {
 
         try {
             Event entity = repo.getOne(id);
+            entity.setName(updateDTO.getName());
             entity.setAddress(updateDTO.getAddress());
-            entity.setEmail(updateDTO.getEmail());
-            entity.setStartDate(updateDTO.getStartDate());
-            entity.setEndDate(updateDTO.getEndDate());
-            entity.setStartTime(updateDTO.getStartTime());
-            entity.setEndTime(updateDTO.getEndTime());
+            // entity.setEmail(updateDTO.getEmail());
+            // entity.setStartDate(updateDTO.getStartDate());
+            // entity.setEndDate(updateDTO.getEndDate());
+            // entity.setStartTime(updateDTO.getStartTime());
+            // entity.setEndTime(updateDTO.getEndTime());
 
             entity = repo.save(entity);
 
@@ -79,7 +80,7 @@ public class EventService {
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getDescription());
+            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getDesc(), c.getEmail());
             listDTO.add(dto);
         }
         return listDTO;

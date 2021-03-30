@@ -27,7 +27,7 @@ public class Event implements Serializable {
     private Long id;
 
     private String name;
-    private String description;
+    private String desc;
     private String address;
     private String email;
 
@@ -49,13 +49,13 @@ public class Event implements Serializable {
     public Event(InsertEventDTO insertDTO) {
         this.name = insertDTO.getName();
         this.address = insertDTO.getAddress();
-        this.description = insertDTO.getDescricao();
+        this.desc = insertDTO.getDesc();
         this.email = insertDTO.getEmail();
 
-        this.startDate = insertDTO.getStartDate();
-        this.endDate = insertDTO.getEndDate();
-        this.startTime = insertDTO.getStartTime();
-        this.endTime = insertDTO.getEndTime();
+        // this.startDate = insertDTO.getStartDate();
+        // this.endDate = insertDTO.getEndDate();
+        // this.startTime = insertDTO.getStartTime();
+        // this.endTime = insertDTO.getEndTime();
 
     }
 
@@ -75,12 +75,12 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {

@@ -6,17 +6,17 @@ import java.time.LocalTime;
 public class InsertEventDTO {
     
     private String name;
-    private String descricao;
+    private String desc;
     private String address;
     private String email;
 
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    // private LocalDate startDate;
+    // private LocalDate endDate;
+    // private LocalTime startTime;
+    // private LocalTime endTime;
     
-    LocalDate dateToday = LocalDate.now();
-    LocalTime timeNow = LocalTime.now();
+    // LocalDate dateToday = LocalDate.now();
+    // LocalTime timeNow = LocalTime.now();
     
     public String getName() {
         return name;
@@ -26,13 +26,13 @@ public class InsertEventDTO {
         this.name = name;
     }
 
-    public String getDescricao() {
+    public String getDesc() {
      
-        return descricao;
+        return desc;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getAddress() {
@@ -51,39 +51,39 @@ public class InsertEventDTO {
         this.email = email;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
-    }
+    // public LocalDate getStartDate() {
+    //     return startDate;
+    // }
 
-    public void setStartDate(LocalDate startDate) {
-        if(startDate.isAfter(dateToday))
-            this.startDate = startDate;
-    }
+    // public void setStartDate(LocalDate startDate) {
+    //     if(startDate.isAfter(dateToday))
+    //         this.startDate = startDate;
+    // }
 
-    public LocalDate getEndDate() {
-        return endDate;
-    }
+    // public LocalDate getEndDate() {
+    //     return endDate;
+    // }
 
-    public void setEndDate(LocalDate endDate) {
-        if(endDate.isAfter(startDate))
-            this.endDate = endDate;
-    }
+    // public void setEndDate(LocalDate endDate) {
+    //     if(endDate.isAfter(startDate))
+    //         this.endDate = endDate;
+    // }
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
+    // public LocalTime getStartTime() {
+    //     return startTime;
+    // }
 
-    public void setStartTime(LocalTime startTime) {
-        if(startTime.isAfter(timeNow))
-            this.startTime = startTime;
-    }
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(LocalTime endTime) {
-        if(endTime.isAfter(startTime))    
-            this.endTime = endTime;
-    }
+    // public void setStartTime(LocalTime startTime) {
+    //     if(startTime.isAfter(timeNow))
+    //         this.startTime = startTime;
+    // }
+    // public LocalTime getEndTime() {
+    //     return endTime;
+    // }
+    // public void setEndTime(LocalTime endTime) {
+    //     if(endTime.isAfter(startTime))    
+    //         this.endTime = endTime;
+    // }
 
     
 }

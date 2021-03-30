@@ -12,7 +12,8 @@ public class EventDTO {
     
     private String name;
     private String address;
-    private String description;
+    private String desc;
+    private String email;
 
     //@DateTimeFormat(pattern = "dd/MM/yyyy")
     //private LocalDate startDate;
@@ -21,11 +22,12 @@ public class EventDTO {
     
     }
 
-    public EventDTO(Long id, String name, String address, String description) {
+    public EventDTO(Long id, String name, String address, String desc, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.description = description;
+        this.desc = desc;
+        this.email = email;
 
 
     }
@@ -36,7 +38,8 @@ public class EventDTO {
         this.id = event.getId();
         this.name = event.getName();
         this.address = event.getAddress();
-        this.description = event.getDescription(); 
+        this.desc = event.getDesc();
+        this.email = event.getEmail(); 
     }
 
     public Long getId() {
@@ -63,6 +66,7 @@ public class EventDTO {
         this.address = address;
     }
 
+    
     // public LocalDate getStartDate() {
     //     return startDate;
     // }
@@ -73,12 +77,20 @@ public class EventDTO {
     //     this.startDate = startDate;
     // }
 
-    public String getDescription() {
-        return description;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 
