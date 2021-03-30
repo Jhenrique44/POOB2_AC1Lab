@@ -18,5 +18,6 @@ public interface EventRepository extends JpaRepository <Event, Long>{
             " ( LOWER(c.desc)        LIKE LOWER(CONCAT('%', :desc , '%')))  "
     )
     public Page <Event> find(Pageable pageRequest, String name, String address, String desc);
+
 }
  

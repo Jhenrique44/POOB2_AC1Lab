@@ -11,9 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.example.demo.dto.InsertEventDTO;
-//import com.fasterxml.jackson.annotation.JsonFormat;
-
-//import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -31,11 +30,11 @@ public class Event implements Serializable {
     private String address;
     private String email;
 
-    //@DateTimeFormat(pattern = "dd/MM/yyyy") //formatando a data
+    @DateTimeFormat(pattern = "dd/MM/yyyy") //formatando a data
     private LocalDate startDate;
     private LocalDate endDate;
 
-    //@JsonFormat(pattern = "HH:mm:ssXXX") //formatando o horario
+    @JsonFormat(pattern = "HH:mm:ssXXX") //formatando o horario
     private LocalTime startTime;
     private LocalTime endTime;
 
@@ -52,10 +51,10 @@ public class Event implements Serializable {
         this.desc = insertDTO.getDesc();
         this.email = insertDTO.getEmail();
 
-        // this.startDate = insertDTO.getStartDate();
-        // this.endDate = insertDTO.getEndDate();
-        // this.startTime = insertDTO.getStartTime();
-        // this.endTime = insertDTO.getEndTime();
+        this.startDate = insertDTO.getStartDate();
+        this.endDate = insertDTO.getEndDate();
+        this.startTime = insertDTO.getStartTime();
+        this.endTime = insertDTO.getEndTime();
 
     }
 

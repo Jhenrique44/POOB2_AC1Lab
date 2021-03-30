@@ -62,11 +62,6 @@ public class EventService {
             Event entity = repo.getOne(id);
             entity.setName(updateDTO.getName());
             entity.setAddress(updateDTO.getAddress());
-            // entity.setEmail(updateDTO.getEmail());
-            // entity.setStartDate(updateDTO.getStartDate());
-            // entity.setEndDate(updateDTO.getEndDate());
-            // entity.setStartTime(updateDTO.getStartTime());
-            // entity.setEndTime(updateDTO.getEndTime());
 
             entity = repo.save(entity);
 

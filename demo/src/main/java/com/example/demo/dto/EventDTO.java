@@ -15,8 +15,8 @@ public class EventDTO {
     private String desc;
     private String email;
 
-    //@DateTimeFormat(pattern = "dd/MM/yyyy")
-    //private LocalDate startDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate startDate;
 
     public EventDTO(){
     
