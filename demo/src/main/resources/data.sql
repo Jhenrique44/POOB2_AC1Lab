@@ -1,4 +1,4 @@
-INSERT INTO tb_event (name, address, desc, email, stD, end_date)  
+INSERT INTO TB_EVENT(name, address, desc, email, stD, end_date)  
      VALUES 
         ('João Antonio1',
         'Rua XV, 1212 – Sorocaba/SP',
