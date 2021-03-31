@@ -31,10 +31,10 @@ public class Event implements Serializable {
     private String email;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy") //formatando a data
-    private LocalDate startDate;
+    private LocalDate stD;
     private LocalDate endDate;
 
-    @JsonFormat(pattern = "HH:mm:ssXXX") //formatando o horario
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS") //formatando o horario
     private LocalTime startTime;
     private LocalTime endTime;
 
@@ -50,14 +50,12 @@ public class Event implements Serializable {
         this.address = insertDTO.getAddress();
         this.desc = insertDTO.getDesc();
         this.email = insertDTO.getEmail();
-
-        this.startDate = insertDTO.getStartDate();
+        this.stD = insertDTO.getStD();
         this.endDate = insertDTO.getEndDate();
         this.startTime = insertDTO.getStartTime();
         this.endTime = insertDTO.getEndTime();
 
     }
-
     public Long getId() {
         return id;
     }
@@ -99,13 +97,13 @@ public class Event implements Serializable {
     }
 
     
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStD() {
+        return stD;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        if(startDate.isAfter(dateToday))
-            this.startDate = startDate;
+    public void setStD(LocalDate stD) {
+        if(stD.isAfter(dateToday))
+            this.stD = stD;
     }
 
     public LocalDate getEndDate() {
@@ -113,7 +111,7 @@ public class Event implements Serializable {
     }
 
     public void setEndDate(LocalDate endDate) {
-        if(endDate.isAfter(startDate))
+        if(endDate.isAfter(stD))
             this.endDate = endDate;
     }
 

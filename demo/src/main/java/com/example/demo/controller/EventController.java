@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
@@ -39,8 +40,8 @@ public class EventController {
         @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy,
         @RequestParam(value = "name",         defaultValue = "") String name,
         @RequestParam(value = "address",      defaultValue = "") String address,
-        @RequestParam(value = "description",  defaultValue = "") String desc 
-
+        @RequestParam(value = "desc",         defaultValue = "") String desc
+        
 
     ) {
 
@@ -60,6 +61,8 @@ public class EventController {
 
         EventDTO dto = service.insert(insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+
+        
         return ResponseEntity.created(uri).body(dto);
     }
 

@@ -3,7 +3,7 @@ package com.example.demo.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class InsertEventDTO {
     
@@ -12,22 +12,22 @@ public class InsertEventDTO {
     private String address;
     private String email;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate startDate;
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private LocalDate stD;
    
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endDate;
 
-    @JsonFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     private LocalTime startTime;
     
-    @JsonFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     private LocalTime endTime;
     
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     LocalDate dateToday = LocalDate.now();
 
-    @JsonFormat(pattern = "HH:mm:ss.SSS")
+    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     LocalTime timeNow = LocalTime.now();
     
     public String getName() {
@@ -63,13 +63,13 @@ public class InsertEventDTO {
         this.email = email;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getStD() {
+        return stD;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        if(startDate.isAfter(dateToday))
-            this.startDate = startDate;
+    public void setStD(LocalDate stD) {
+        if(stD.isAfter(dateToday))
+            this.stD = stD;
     }
 
     public LocalDate getEndDate() {
@@ -77,7 +77,7 @@ public class InsertEventDTO {
     }
 
     public void setEndDate(LocalDate endDate) {
-        if(endDate.isAfter(startDate))
+        if(endDate.isAfter(stD))
             this.endDate = endDate;
     }
 

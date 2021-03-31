@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,7 @@ public class EventService {
 
         Event entity = new Event(insert);
         entity = repo.save(entity);
+
         return new EventDTO(entity);
     }
 
@@ -75,7 +77,7 @@ public class EventService {
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getDesc(), c.getEmail());
+            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getAddress(), c.getDesc(), c.getEmail(), c.getStD(), c.getEndDate());
             listDTO.add(dto);
         }
         return listDTO;

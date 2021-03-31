@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.time.LocalDate;
+
 import com.example.demo.entities.Event;
 
 import org.springframework.data.domain.Page;
@@ -13,10 +15,11 @@ public interface EventRepository extends JpaRepository <Event, Long>{
 
     @Query("SELECT c FROM Event c " + 
             "WHERE " + 
-            " ( LOWER(c.name)        LIKE LOWER(CONCAT('%', :name , '%'))) AND     " + 
+            " ( LOWER(c.name)        LIKE LOWER(CONCAT('%', :name , '%')))    AND  " + 
             " ( LOWER(c.address)     LIKE LOWER(CONCAT('%', :address , '%'))) AND  " +
-            " ( LOWER(c.desc)        LIKE LOWER(CONCAT('%', :desc , '%')))  "
-    )
+            " ( LOWER(c.desc)        LIKE LOWER(CONCAT('%', :desc , '%' )))   AND  " +
+            " ( c.stD >= '2020-02-04')"
+        )
     public Page <Event> find(Pageable pageRequest, String name, String address, String desc);
 
 }
