@@ -52,8 +52,6 @@ public class Event implements Serializable {
         this.email = insertDTO.getEmail();
         this.stD = insertDTO.getStD();
         this.endDate = insertDTO.getEndDate();
-        this.startTime = insertDTO.getStartTime();
-        this.endTime = insertDTO.getEndTime();
 
     }
     public Long getId() {

@@ -112,7 +112,7 @@ public class EventDTO {
             if(endDate.isAfter(stD))
                 this.endDate = endDate;
         } catch (DataAccessException e) {
-            System.out.println("invalid Date");
+            System.out.println("invalid Date ");
         }
     }
 
