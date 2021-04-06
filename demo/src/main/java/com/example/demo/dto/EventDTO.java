@@ -15,26 +15,26 @@ public class EventDTO {
     
     private String name;
     private String address;
-    private String desc;
+    private String descp;
     private String email;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate stD;
+    private LocalDate std;
     
-    private LocalDate endDate;
+    private LocalDate endate;
 
     public EventDTO(){
     
     }
 
-    public EventDTO(Long id, String name, String address, String desc, String email, LocalDate stD, LocalDate endDate) {
+    public EventDTO(Long id, String name, String address, String descp, String email, LocalDate std, LocalDate endate) {
         this.id = id;
         this.name = name;
         this.address = address;
-        this.desc = desc;
+        this.descp = descp;
         this.email = email;
-        this.stD = stD;
-        this.endDate = endDate;
+        this.std = std;
+        this.endate = endate;
 
 
     }
@@ -45,10 +45,10 @@ public class EventDTO {
         this.id = event.getId();
         this.name = event.getName();
         this.address = event.getAddress();
-        this.desc = event.getDesc();
+        this.descp = event.getDescp();
         this.email = event.getEmail();
-        this.stD = event.getStD();
-        this.endDate = event.getEndDate();
+        this.std = event.getStd();
+        this.endate = event.getEndate();
     }
 
     public Long getId() {
@@ -76,22 +76,22 @@ public class EventDTO {
     }
 
     
-    public LocalDate getStD() {
-         return stD;
+    public LocalDate getStd() {
+         return std;
     }
 
-    public void setStD(LocalDate stD) {
+    public void setStd(LocalDate std) {
         
-        if(stD.isAfter(LocalDate.now()))
-            this.stD = stD;
+        if(std.isAfter(LocalDate.now()))
+            this.std = std;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescp() {
+        return descp;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescp(String descp) {
+        this.descp = descp;
     }
 
     public String getEmail() {
@@ -102,15 +102,15 @@ public class EventDTO {
         this.email = email;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEndate() {
+        return endate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(LocalDate endate) {
         
         try {
-            if(endDate.isAfter(stD))
-                this.endDate = endDate;
+            if(endate.isAfter(std))
+                this.endate = endate;
         } catch (DataAccessException e) {
             System.out.println("invalid Date ");
         }

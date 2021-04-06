@@ -8,27 +8,27 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class InsertEventDTO {
     
     private String name;
-    private String desc;
     private String address;
+    private String descp;
     private String email;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate stD;
+    private LocalDate std;
    
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate endDate;
+    private LocalDate endate;
 
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    private LocalTime startTime;
+    // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    // private LocalTime startTime;
     
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    private LocalTime endTime;
+    // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    // private LocalTime endTime;
     
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
-    LocalDate dateToday = LocalDate.now();
+    // @DateTimeFormat(pattern = "dd/MM/yyyy")
+    // LocalDate dateToday = LocalDate.now();
 
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    LocalTime timeNow = LocalTime.now();
+    // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
+    // LocalTime timeNow = LocalTime.now();
     
     public String getName() {
         return name;
@@ -38,13 +38,13 @@ public class InsertEventDTO {
         this.name = name;
     }
 
-    public String getDesc() {
+    public String getDescp() {
      
-        return desc;
+        return descp;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescp(String descp) {
+        this.descp = descp;
     }
 
     public String getAddress() {
@@ -63,39 +63,39 @@ public class InsertEventDTO {
         this.email = email;
     }
 
-    public LocalDate getStD() {
-        return stD;
+    public LocalDate getStd() {
+        return std;
     }
 
-    public void setStD(LocalDate stD) {
-        if(stD.isAfter(dateToday))
-            this.stD = stD;
+    public void setStd(LocalDate std) {
+
+        this.std = std;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEndate() {
+        return endate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        if(endDate.isAfter(stD))
-            this.endDate = endDate;
+    public void setEndate(LocalDate endate) {
+        if(endate.isAfter(std))
+            this.endate = endate;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
+    // public LocalTime getStartTime() {
+    //     return startTime;
+    // }
 
-    public void setStartTime(LocalTime startTime) {
-        if(startTime.isAfter(timeNow))
-            this.startTime = startTime;
-    }
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-    public void setEndTime(LocalTime endTime) {
-        if(endTime.isAfter(startTime))    
-            this.endTime = endTime;
-    }
+    // public void setStartTime(LocalTime startTime) {
+    //     if(startTime.isAfter(timeNow))
+    //         this.startTime = startTime;
+    // }
+    // public LocalTime getEndTime() {
+    //     return endTime;
+    // }
+    // public void setEndTime(LocalTime endTime) {
+    //     if(endTime.isAfter(startTime))    
+    //         this.endTime = endTime;
+    // }
 
     
 }

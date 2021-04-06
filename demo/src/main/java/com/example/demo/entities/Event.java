@@ -17,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="TB_EVENT")
-public class Event implements Serializable {
+public class Event implements Serializable{
     
     private static final long serialVersionUID = 1L;
 
@@ -26,20 +26,22 @@ public class Event implements Serializable {
     private Long id;
 
     private String name;
-    private String desc;
+
+    private String descp;
+    
     private String address;
+    
     private String email;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy") //formatando a data
-    private LocalDate stD;
-    private LocalDate endDate;
+    private LocalDate std;
+    private LocalDate endate;
 
-    @DateTimeFormat(pattern = "HH:mm:ss.SSS") //formatando o horario
-    private LocalTime startTime;
-    private LocalTime endTime;
+    // @DateTimeFormat(pattern = "HH:mm:ss.SSS") //formatando o horario
+    // private LocalTime startTime;
+    // private LocalTime endTime;
 
-    LocalDate dateToday;
-    LocalTime hourNow;
+    //LocalDate dateToday;
+    //LocalTime hourNow;
     
     public Event(){
         
@@ -48,10 +50,10 @@ public class Event implements Serializable {
     public Event(InsertEventDTO insertDTO) {
         this.name = insertDTO.getName();
         this.address = insertDTO.getAddress();
-        this.desc = insertDTO.getDesc();
+        this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
-        this.stD = insertDTO.getStD();
-        this.endDate = insertDTO.getEndDate();
+        this.std = insertDTO.getStd();
+        this.endate = insertDTO.getEndate();
 
     }
     public Long getId() {
@@ -70,12 +72,12 @@ public class Event implements Serializable {
         this.name = name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescp() {
+        return descp;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescp(String descp) {
+        this.descp = descp;
     }
 
     public String getAddress() {
@@ -95,41 +97,41 @@ public class Event implements Serializable {
     }
 
     
-    public LocalDate getStD() {
-        return stD;
+    public LocalDate getStd() {
+        return std;
     }
 
-    public void setStD(LocalDate stD) {
-        if(stD.isAfter(dateToday))
-            this.stD = stD;
+    public void setStd(LocalDate std) {
+        // if(stD.isAfter(dateToday))
+        this.std = std;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public LocalDate getEndate() {
+        return endate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        if(endDate.isAfter(stD))
-            this.endDate = endDate;
+    public void setEndate(LocalDate endate) {
+        // if(endate.isAfter(stD))
+        this.endate = endate;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
-    }
+    // public LocalTime getStartTime() {
+    //     return startTime;
+    // }
 
-    public void setStartTime(LocalTime startTime) {
-        if(startTime.isAfter(hourNow)) 
-            this.startTime = startTime;
-    }
+    // public void setStartTime(LocalTime startTime) {
+    //     if(startTime.isAfter(hourNow)) 
+    //         this.startTime = startTime;
+    // }
 
-    public LocalTime getEndTime() {
-        return endTime;
-    }
+    // public LocalTime getEndTime() {
+    //     return endTime;
+    // }
 
-    public void setEndTime(LocalTime endTime) {
-        if(endTime.isAfter(startTime))
-            this.endTime = endTime;
-    }
+    // public void setEndTime(LocalTime endTime) {
+    //     if(endTime.isAfter(startTime))
+    //         this.endTime = endTime;
+    // }
 
     @Override
     public int hashCode() {
@@ -157,8 +159,6 @@ public class Event implements Serializable {
     }
 
     
-
-
     
     
 
