@@ -33,6 +33,7 @@ public class Event implements Serializable{
     
     private String email;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate std;
     private LocalDate endate;
 
