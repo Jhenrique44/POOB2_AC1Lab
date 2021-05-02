@@ -2,7 +2,7 @@ package com.example.demo.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
+// import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.example.demo.dto.InsertEventDTO;
-import com.fasterxml.jackson.annotation.JsonFormat;
+// import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
