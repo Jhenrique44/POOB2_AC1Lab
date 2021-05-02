@@ -1,6 +1,9 @@
 package com.example.demo.controller;
 
+import java.net.URI;
+
 import com.example.demo.dto.AttendeeDTO;
+import com.example.demo.dto.InsertAttendeeDTO;
 import com.example.demo.service.AttendeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,12 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/attendees")
@@ -46,6 +52,15 @@ public class AttendeeController {
 
         AttendeeDTO dto = service.getAttendeeById(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping
+    public ResponseEntity<AttendeeDTO> insert(@RequestBody InsertAttendeeDTO insertDTO){
+
+        AttendeeDTO dto = service.insert(insertDTO);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(dto);
     }
 
 }

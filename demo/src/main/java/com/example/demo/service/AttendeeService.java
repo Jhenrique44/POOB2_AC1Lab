@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.Optional;
 
 import com.example.demo.dto.AttendeeDTO;
+import com.example.demo.dto.InsertAttendeeDTO;
 import com.example.demo.entities.Attendee;
 import com.example.demo.repository.AttendeeRepository;
 
@@ -34,5 +35,14 @@ public class AttendeeService {
         Attendee attendee = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not Found"));
 
         return new AttendeeDTO(attendee);
+    }
+
+    public AttendeeDTO insert(InsertAttendeeDTO insert) {
+        
+        Attendee entity = new Attendee(insert);
+        entity = repo.save(entity);
+
+        return new AttendeeDTO(entity);
+
     }
 }

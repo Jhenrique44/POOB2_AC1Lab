@@ -15,7 +15,7 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long>{
     @Query("SELECT a FROM Attendee a " + 
             "WHERE " + 
             "( LOWER(a.name)        LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
-            "(a.balance             LIKE :balance)"
+            "(a.balance             LIKE (CONCAT('%', :balance , '%')))"
     )
     public Page<Attendee> find(Pageable pageRequest, String name, Double balance);
 }

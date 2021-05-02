@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.dto.InsertAttendeeDTO;
+
 @Entity
 @Table(name = "TB_ATTENDEE")
 public class Attendee implements Serializable {
@@ -27,12 +29,19 @@ public class Attendee implements Serializable {
 
     }
 
-    public Attendee(Long id, String name, String email, Double balance) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.balance = balance;
+    public Attendee(InsertAttendeeDTO insertDTO){
+
+        this.name = insertDTO.getName();
+        this.email = insertDTO.getEmail();
+        this.balance = insertDTO.getBalance();
+
     }
+    // public Attendee(Long id, String name, String email, Double balance) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.email = email;
+    //     this.balance = balance;
+    // }
 
     public Long getId() {
         return id;
