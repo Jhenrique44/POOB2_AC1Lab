@@ -1,9 +1,14 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.EntityExistsException;
 
 import com.example.demo.dto.AdminDTO;
 import com.example.demo.dto.InsertAdminDTO;
+import com.example.demo.dto.UpdateAdminDTO;
 import com.example.demo.entities.Admin;
 import com.example.demo.repository.AdminRepository;
 
@@ -21,8 +26,6 @@ public class AdminService {
 
     @Autowired 
     private AdminRepository repo;
-
-
 
 
     public Page<AdminDTO> getAdmins(PageRequest pageRequest, String name){
@@ -52,9 +55,7 @@ public class AdminService {
 
     }
 
-
-
-	public void delete(Long id) {
+    public void delete(Long id) {
 
         try {
             repo.deleteById(id);
@@ -64,7 +65,36 @@ public class AdminService {
         }
 	}
 
+    public AdminDTO udpdate(Long id, UpdateAdminDTO updateDTO){
 
+        try {
+            Admin entity = repo.getOne(id);
+            // entity.setName(updateDTO.getName());
+            entity.setEmail(updateDTO.getEmail());
+            entity.setPhoneNumber(updateDTO.getPhoneNumber());
+
+            entity = repo.save(entity);
+
+            return new AdminDTO(entity);
+        } catch (EntityExistsException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found");
+        }
+
+
+    }
     
+    public List<AdminDTO> toDTOList(List<Admin> list){
+
+        List<AdminDTO> listDTO = new ArrayList<>();
+
+        for(Admin a: list){
+            AdminDTO dto = new AdminDTO(a.getId(), a.getName(), a.getEmail(), a.getPhoneNumber());
+            listDTO.add(dto);
+        }
+
+        return listDTO;
+
+        
+    }
 
 }

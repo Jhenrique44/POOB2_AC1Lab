@@ -4,9 +4,9 @@ import java.net.URI;
 
 import com.example.demo.dto.AdminDTO;
 import com.example.demo.dto.InsertAdminDTO;
+import com.example.demo.dto.UpdateAdminDTO;
 import com.example.demo.service.AdminService;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -62,6 +62,14 @@ public class AdminController {
         return ResponseEntity.created(uri).body(dto);
 
     }
+    @PutMapping("{id}")
+    public ResponseEntity<AdminDTO> update(@PathVariable Long id, @RequestBody UpdateAdminDTO updateDTO){
+
+        AdminDTO dto = service.udpdate(id, updateDTO);
+        return ResponseEntity.ok().body(dto);
+    }
+
+
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id){
