@@ -4,6 +4,7 @@ import java.net.URI;
 
 import com.example.demo.dto.AttendeeDTO;
 import com.example.demo.dto.InsertAttendeeDTO;
+import com.example.demo.dto.UpdateAttendeeDTO;
 import com.example.demo.service.AttendeeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,4 +66,10 @@ public class AttendeeController {
         return ResponseEntity.created(uri).body(dto);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<AttendeeDTO> update(@PathVariable Long id, @RequestBody UpdateAttendeeDTO updateDTO){
+
+        AttendeeDTO dto = service.update(id, updateDTO);
+        return ResponseEntity.ok().body(dto);
+    }
 }

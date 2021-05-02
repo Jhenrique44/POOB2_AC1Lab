@@ -20,12 +20,12 @@ public class AttendeeDTO {
         this.email = email;
         this.balance = balance;
     }
-    public AttendeeDTO(Attendee attendees){
+    public AttendeeDTO(Attendee attendee){
 
-        this.id = attendees.getId();
-        this.name = attendees.getName();
-        this.email = attendees.getEmail();
-        this.balance = attendees.getBalance();
+        this.id = attendee.getId();
+        this.name = attendee.getName();
+        this.email = attendee.getEmail();
+        this.balance = attendee.getBalance();
     }
 
     public Long getId() {
