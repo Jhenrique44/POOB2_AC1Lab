@@ -72,4 +72,13 @@ public class AttendeeController {
         AttendeeDTO dto = service.update(id, updateDTO);
         return ResponseEntity.ok().body(dto);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+
+
+    }
 }

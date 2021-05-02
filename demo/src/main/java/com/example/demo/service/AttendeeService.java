@@ -13,6 +13,7 @@ import com.example.demo.entities.Attendee;
 import com.example.demo.repository.AttendeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -73,5 +74,15 @@ public class AttendeeService {
             listDTO.add(dto);
         }
         return listDTO;
+    }
+
+    public void delete(Long id) {
+
+        try {
+            repo.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Admin not found");
+        }
+
     }
 }
