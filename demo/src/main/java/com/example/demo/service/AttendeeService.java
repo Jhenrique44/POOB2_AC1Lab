@@ -25,9 +25,9 @@ public class AttendeeService {
     @Autowired
     private AttendeeRepository repo;
 
-    public Page<AttendeeDTO> getAttendees(PageRequest pageRequest, String name, Double balance){
+    public Page<AttendeeDTO> getAttendees(PageRequest pageRequest, String name){
         
-        Page<Attendee> list = repo.find(pageRequest, name, balance);
+        Page<Attendee> list = repo.find(pageRequest, name);
         
         return list.map( c -> new AttendeeDTO(c) );
     }
@@ -65,6 +65,7 @@ public class AttendeeService {
 
 
     public List<AttendeeDTO> toDTOList(List<Attendee> list){
+        
         List<AttendeeDTO> listDTO = new ArrayList<>();
 
         for(Attendee a: list){
