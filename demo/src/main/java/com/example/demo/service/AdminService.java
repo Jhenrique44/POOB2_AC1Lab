@@ -6,6 +6,8 @@ import com.example.demo.entities.Admin;
 import com.example.demo.repository.AdminRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +20,11 @@ public class AdminService {
 
 
 
+    public Page<AdminDTO> getAdmins(PageRequest pageRequest, String name){
 
+        Page<Admin> list = repo.find(pageRequest, name);
+        return list.map( c -> new AdminDTO(c));
+    }
 
 
 
