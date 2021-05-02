@@ -7,6 +7,8 @@ public class AdminDTO {
 
     private Long id;
     
+    private String name;
+    
     private String email;
 
     private String phoneNumber;
@@ -14,15 +16,17 @@ public class AdminDTO {
     public AdminDTO(){
 
     }
-    public AdminDTO(Long id, String email, String phoneNumber){
+    public AdminDTO(Long id, String name, String email, String phoneNumber){
 
         this.id = id;
+        this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
     public AdminDTO(Admin adm){
 
         this.id = adm.getId();
+        this.name = adm.getName();
         this.email = adm.getEmail();
         this.phoneNumber = adm.getPhoneNumber();
 
@@ -53,6 +57,12 @@ public class AdminDTO {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
     
 }
