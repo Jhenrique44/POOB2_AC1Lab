@@ -2,7 +2,7 @@
 #Author:  João Henrique de Freitas 
 #RA: 190706 
 
-JSON requirement for new entities <POST>
+JSON requirement for injection <POST>
 { 
     "name": "aston",
     "address": "av de penapoles",
