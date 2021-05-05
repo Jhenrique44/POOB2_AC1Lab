@@ -6,42 +6,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.example.demo.dto.InsertAttendeeDTO;
-
 @Entity
-@Table(name = "TB_ATTENDEE")
-public class Attendee implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@Table(name = "TB_USER")
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     private String name;
-    private String email;
-    private Double balance;
     
-    public Attendee(){
+    private String email;
+
+    public User(){
 
     }
 
-    public Attendee(InsertAttendeeDTO insertDTO){
-
-        this.name = insertDTO.getName();
-        this.email = insertDTO.getEmail();
-        this.balance = insertDTO.getBalance();
-
+    public User(Long id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
-    // public Attendee(Long id, String name, String email, Double balance) {
-    //     this.id = id;
-    //     this.name = name;
-    //     this.email = email;
-    //     this.balance = balance;
-    // }
+
 
     public Long getId() {
         return id;
@@ -67,14 +58,6 @@ public class Attendee implements Serializable {
         this.email = email;
     }
 
-    public Double getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -91,7 +74,7 @@ public class Attendee implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Attendee other = (Attendee) obj;
+        User other = (User) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -100,7 +83,6 @@ public class Attendee implements Serializable {
         return true;
     }
 
-    
-    
 
+    
 }

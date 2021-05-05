@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.net.URI;
 // import java.time.LocalDate;
+import java.time.LocalDate;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
@@ -40,13 +41,15 @@ public class EventController {
         @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy,
         @RequestParam(value = "name",         defaultValue = "") String name,
         @RequestParam(value = "address",      defaultValue = "") String address,
-        @RequestParam(value = "descp",         defaultValue = "") String descp
+        @RequestParam(value = "descp",        defaultValue = "") String descp,
+        @RequestParam(value = "std",          defaultValue = "1900-01-01") LocalDate std,
+        @RequestParam(value = "email",        defaultValue = "") String email
         
 
     ) {
 
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
-        Page<EventDTO> list = service.getEvents(pageRequest, name.trim(), address.trim(), descp.trim());
+        Page<EventDTO> list = service.getEvents(pageRequest, name.trim(), address.trim(), descp.trim(), std, email.trim());
         return ResponseEntity.ok(list);
     }
     @GetMapping("{id}")

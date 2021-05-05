@@ -3,10 +3,9 @@ package com.example.demo.dto;
 import java.time.LocalDate;
 
 import com.example.demo.entities.Event;
-// import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class EventDTO {
@@ -18,9 +17,10 @@ public class EventDTO {
     private String descp;
     private String email;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate std;
     
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endate;
 
     public EventDTO(){
@@ -38,7 +38,7 @@ public class EventDTO {
 
 
     }
-
+    
 
     public EventDTO(Event event) {
 

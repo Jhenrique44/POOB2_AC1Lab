@@ -1,5 +1,7 @@
 package com.example.demo.repository;
 
+import java.time.LocalDate;
+
 // import java.time.LocalDate;
 
 import com.example.demo.entities.Event;
@@ -15,12 +17,13 @@ public interface EventRepository extends JpaRepository <Event, Long>{
 
     @Query("SELECT c FROM Event c " + 
             "WHERE " + 
-            " ( LOWER(c.name)        LIKE LOWER(CONCAT('%', :name , '%')))    AND  " + 
+            " ( LOWER(c.name)        LIKE LOWER(CONCAT('%', :name    , '%')))    AND  " + 
             " ( LOWER(c.address)     LIKE LOWER(CONCAT('%', :address , '%'))) AND  " +
-            " ( LOWER(c.descp)        LIKE LOWER(CONCAT('%', :descp , '%' )))   AND  " +
-            " ( c.std >= '2021-10-05')"
+            " ( LOWER(c.descp)        LIKE LOWER(CONCAT('%', :descp  , '%' )))   AND  " +
+            "  c.std                    >                    :std                AND  " +
+            " ( LOWER(c.email)       LIKE LOWER(CONCAT('%', :email   , '%')))"
         )
-    public Page <Event> find(Pageable pageRequest, String name, String address, String descp);
+    public Page <Event> find(Pageable pageRequest, String name, String address, String descp, LocalDate std, String email);
 
 }
  

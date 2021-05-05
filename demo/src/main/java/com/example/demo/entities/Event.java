@@ -2,21 +2,28 @@ package com.example.demo.entities;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 // import java.time.LocalTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.example.demo.dto.InsertEventDTO;
-// import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
 @Table(name="TB_EVENT")
+@PrimaryKeyJoinColumn(name = "USER_ID")
 public class Event implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -26,23 +33,31 @@ public class Event implements Serializable{
     private Long id;
 
     private String name;
-
-    private String descp;
-    
+    private String descp;    
     private String address;
-    
     private String email;
-
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Long amountFreeTickets;
+    private Long amountPayTickets;
+    private Double priceTicket;
     private LocalDate std;
     private LocalDate endate;
-
-    // @DateTimeFormat(pattern = "HH:mm:ss.SSS") //formatando o horario
     // private LocalTime startTime;
     // private LocalTime endTime;
-
     //LocalDate dateToday;
-    //LocalTime hourNow;
+    // LocalTime hourNow;
+
+    @ManyToOne // N events have one admin 
+    @JoinColumn(name = "ADMIN_USER_ID")
+    private Admin admin;
+
+
+    @ManyToMany(mappedBy = "events") // N events have N places
+    private List<Place> places = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.PERSIST) //One event have N tickets 
+    @JoinColumn(name = "EVENT_ADMIN_ID")
+    private List<Ticket> tickets = new ArrayList<>();
+
     
     public Event(){
         
@@ -134,6 +149,55 @@ public class Event implements Serializable{
     //         this.endTime = endTime;
     // }
 
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+
+    public Long getAmountPayTickets() {
+        return amountPayTickets;
+    }
+
+    public void setAmountPayTickets(Long amountPayTickets) {
+        this.amountPayTickets = amountPayTickets;
+    }
+
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
+    
+    public Admin getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
+    }
+
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void addPlace(Place place) {
+        this.places.add(place);
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void addTicket(Ticket ticket) {
+        this.tickets.add(ticket);
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -157,6 +221,20 @@ public class Event implements Serializable{
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Event(Long id, String name, String descp, String address, String email, Long amountFreeTickets,
+            Long amountPayTickets, Double priceTicket, LocalDate std, LocalDate endate) {
+        this.id = id;
+        this.name = name;
+        this.descp = descp;
+        this.address = address;
+        this.email = email;
+        this.amountFreeTickets = amountFreeTickets;
+        this.amountPayTickets = amountPayTickets;
+        this.priceTicket = priceTicket;
+        this.std = std;
+        this.endate = endate;
     }
 
     

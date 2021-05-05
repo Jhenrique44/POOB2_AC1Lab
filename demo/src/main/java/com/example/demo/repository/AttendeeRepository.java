@@ -1,6 +1,6 @@
 package com.example.demo.repository;
 
-import com.example.demo.entities.Attendee;
+import com.example.demo.entities.Attend;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AttendeeRepository extends JpaRepository<Attendee, Long>{
+public interface AttendeeRepository extends JpaRepository<Attend, Long>{
     
 
     @Query("SELECT a FROM Attendee a " + 
@@ -17,5 +17,5 @@ public interface AttendeeRepository extends JpaRepository<Attendee, Long>{
             "( LOWER(a.name)        LIKE LOWER(CONCAT('%', :name, '%')))"
             // "(a.balance             LIKE (CONCAT('%', :balance , '%')))"
     )
-    public Page<Attendee> find(Pageable pageRequest, String name);
+    public Page<Attend> find(Pageable pageRequest, String name);
 }

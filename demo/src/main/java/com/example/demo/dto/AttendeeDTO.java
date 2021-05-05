@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.entities.Attendee;
+import com.example.demo.entities.Attend;
 
 public class AttendeeDTO {
     
@@ -20,7 +20,7 @@ public class AttendeeDTO {
         this.email = email;
         this.balance = balance;
     }
-    public AttendeeDTO(Attendee attendee){
+    public AttendeeDTO(Attend attendee){
 
         this.id = attendee.getId();
         this.name = attendee.getName();

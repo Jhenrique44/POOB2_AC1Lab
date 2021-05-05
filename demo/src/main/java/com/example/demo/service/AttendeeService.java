@@ -9,7 +9,7 @@ import javax.persistence.EntityExistsException;
 import com.example.demo.dto.AttendeeDTO;
 import com.example.demo.dto.InsertAttendeeDTO;
 import com.example.demo.dto.UpdateAttendeeDTO;
-import com.example.demo.entities.Attendee;
+import com.example.demo.entities.Attend;
 import com.example.demo.repository.AttendeeRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +28,21 @@ public class AttendeeService {
 
     public Page<AttendeeDTO> getAttendees(PageRequest pageRequest, String name){
         
-        Page<Attendee> list = repo.find(pageRequest, name);
+        Page<Attend> list = repo.find(pageRequest, name);
         
         return list.map( c -> new AttendeeDTO(c) );
     }
 
     public AttendeeDTO getAttendeeById(Long id){
-        Optional<Attendee> op = repo.findById(id);
-        Attendee attendee = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not Found"));
+        Optional<Attend> op = repo.findById(id);
+        Attend attendee = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not Found"));
 
         return new AttendeeDTO(attendee);
     }
 
     public AttendeeDTO insert(InsertAttendeeDTO insert) {
         
-        Attendee entity = new Attendee(insert);
+        Attend entity = new Attend(insert);
         entity = repo.save(entity);
 
         return new AttendeeDTO(entity);
@@ -52,7 +52,7 @@ public class AttendeeService {
 
 
         try {
-            Attendee entity = repo.getOne(id);
+            Attend entity = repo.getOne(id);
 
             entity.setEmail(updateDTO.getEmail());
             
@@ -65,11 +65,11 @@ public class AttendeeService {
     }
 
 
-    public List<AttendeeDTO> toDTOList(List<Attendee> list){
+    public List<AttendeeDTO> toDTOList(List<Attend> list){
         
         List<AttendeeDTO> listDTO = new ArrayList<>();
 
-        for(Attendee a: list){
+        for(Attend a: list){
             AttendeeDTO dto = new AttendeeDTO(a.getId(), a.getName(), a.getEmail(), a.getBalance());
             listDTO.add(dto);
         }
