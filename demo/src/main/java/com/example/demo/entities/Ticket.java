@@ -16,7 +16,7 @@ public class Ticket implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Enum type;
+    private TicketType type;
 
     private Instant date;
 
@@ -28,7 +28,7 @@ public class Ticket implements Serializable {
 
     }
 
-    public Ticket(Long id, Enum type, Instant date, Double price) {
+    public Ticket(Long id, TicketType type, Instant date, Double price) {
         this.id = id;
         this.type = type;
         this.date = date;
@@ -43,11 +43,11 @@ public class Ticket implements Serializable {
         this.id = id;
     }
 
-    public Enum getType() {
+    public TicketType getType() {
         return type;
     }
 
-    public void setType(Enum type) {
+    public void setType(TicketType type) {
         this.type = type;
     }
 

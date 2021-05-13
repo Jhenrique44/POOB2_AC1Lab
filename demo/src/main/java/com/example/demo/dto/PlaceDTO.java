@@ -1,48 +1,28 @@
-package com.example.demo.entities;
+package com.example.demo.dto;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.demo.entities.Place;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+public class PlaceDTO {
 
-
-@Entity
-@Table(name = "TB_PLACE")
-public class Place implements Serializable {
-    
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
     private String address;
-
-    @ManyToMany
-    @JoinTable(
-        name = "TB_EVENT_PLACE",
-        joinColumns = @JoinColumn(name="PLACE_ID"),
-        inverseJoinColumns = @JoinColumn(name= "EVENT_ID")
-    )
-    private List<Event> events = new ArrayList<>();
-
-    public Place(){
+    
+    public PlaceDTO(){
 
     }
-
-    public Place(Long id, String name, String address) {
+    public PlaceDTO(Long id, String name, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
+    }
+    public PlaceDTO(Place place){
+
+        this.id = place.getId();
+        this.name = place.getName();
+        this.address = place.getAddress();
     }
 
     public Long getId() {
@@ -69,16 +49,6 @@ public class Place implements Serializable {
         this.address = address;
     }
 
-
-    
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void addEvent(Event event) {
-        this.events.add(event);
-    }
-
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -95,7 +65,7 @@ public class Place implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Place other = (Place) obj;
+        PlaceDTO other = (PlaceDTO) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -104,7 +74,5 @@ public class Place implements Serializable {
         return true;
     }
 
-
     
-
 }

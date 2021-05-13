@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-public class UpdateAttendeeDTO {
+public class UpdateAttendDTO {
     
     private String email;
 

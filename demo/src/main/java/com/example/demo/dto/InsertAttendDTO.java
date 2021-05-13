@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-public class InsertAttendeeDTO {
+public class InsertAttendDTO {
     
     private String name;
 

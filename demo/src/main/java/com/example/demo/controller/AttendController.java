@@ -2,10 +2,10 @@ package com.example.demo.controller;
 
 import java.net.URI;
 
-import com.example.demo.dto.AttendeeDTO;
-import com.example.demo.dto.InsertAttendeeDTO;
-import com.example.demo.dto.UpdateAttendeeDTO;
-import com.example.demo.service.AttendeeService;
+import com.example.demo.dto.AttendDTO;
+import com.example.demo.dto.InsertAttendDTO;
+import com.example.demo.dto.UpdateAttendDTO;
+import com.example.demo.service.AttendService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,14 +25,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/attendees")
-public class AttendeeController {
+public class AttendController {
     
 
     @Autowired
-    private AttendeeService service;
+    private AttendService service;
 
     @GetMapping
-    public ResponseEntity<Page<AttendeeDTO>> getAttendees(
+    public ResponseEntity<Page<AttendDTO>> getAttendees(
         
         @RequestParam(value = "page",         defaultValue = "0") Integer page,
         @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
@@ -45,31 +45,31 @@ public class AttendeeController {
     
     ){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
-        Page<AttendeeDTO> list = service.getAttendees(pageRequest, name.trim());
+        Page<AttendDTO> list = service.getAttendees(pageRequest, name.trim());
         
         return ResponseEntity.ok(list);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<AttendeeDTO> getAttendeeById(@PathVariable Long id){
+    public ResponseEntity<AttendDTO> getAttendeeById(@PathVariable Long id){
 
-        AttendeeDTO dto = service.getAttendeeById(id);
+        AttendDTO dto = service.getAttendeeById(id);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
-    public ResponseEntity<AttendeeDTO> insert(@RequestBody InsertAttendeeDTO insertDTO){
+    public ResponseEntity<AttendDTO> insert(@RequestBody InsertAttendDTO insertDTO){
 
-        AttendeeDTO dto = service.insert(insertDTO);
+        AttendDTO dto = service.insert(insertDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
 
         return ResponseEntity.created(uri).body(dto);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<AttendeeDTO> update(@PathVariable Long id, @RequestBody UpdateAttendeeDTO updateDTO){
+    public ResponseEntity<AttendDTO> update(@PathVariable Long id, @RequestBody UpdateAttendDTO updateDTO){
 
-        AttendeeDTO dto = service.update(id, updateDTO);
+        AttendDTO dto = service.update(id, updateDTO);
         return ResponseEntity.ok().body(dto);
     }
 

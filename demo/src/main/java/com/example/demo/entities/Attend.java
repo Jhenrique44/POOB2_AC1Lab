@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.example.demo.dto.InsertAttendDTO;
+
 @Entity
 @Table(name = "TB_ATTEND")
 @PrimaryKeyJoinColumn(name = "USER_ID")
@@ -37,8 +39,8 @@ public class Attend extends User {
         this.tickets.add(ticket);
     }
 
-    public Attend(){
-
+    public Attend(InsertAttendDTO insert){
+        this.balance = insert.getBalance();
     }
 
     public Attend(Long id, String name, String email, Double balance) {

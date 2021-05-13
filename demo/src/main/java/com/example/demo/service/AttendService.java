@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import javax.persistence.EntityExistsException;
 
-import com.example.demo.dto.AttendeeDTO;
-import com.example.demo.dto.InsertAttendeeDTO;
-import com.example.demo.dto.UpdateAttendeeDTO;
+import com.example.demo.dto.AttendDTO;
+import com.example.demo.dto.InsertAttendDTO;
+import com.example.demo.dto.UpdateAttendDTO;
 import com.example.demo.entities.Attend;
 import com.example.demo.repository.AttendeeRepository;
 
@@ -21,34 +21,34 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class AttendeeService {
+public class AttendService {
     
     @Autowired
     private AttendeeRepository repo;
 
-    public Page<AttendeeDTO> getAttendees(PageRequest pageRequest, String name){
+    public Page<AttendDTO> getAttendees(PageRequest pageRequest, String name){
         
         Page<Attend> list = repo.find(pageRequest, name);
         
-        return list.map( c -> new AttendeeDTO(c) );
+        return list.map( c -> new AttendDTO(c) );
     }
 
-    public AttendeeDTO getAttendeeById(Long id){
+    public AttendDTO getAttendeeById(Long id){
         Optional<Attend> op = repo.findById(id);
         Attend attendee = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Attendee not Found"));
 
-        return new AttendeeDTO(attendee);
+        return new AttendDTO(attendee);
     }
 
-    public AttendeeDTO insert(InsertAttendeeDTO insert) {
+    public AttendDTO insert(InsertAttendDTO insert) {
         
         Attend entity = new Attend(insert);
         entity = repo.save(entity);
 
-        return new AttendeeDTO(entity);
+        return new AttendDTO(entity);
 
     }
-    public AttendeeDTO update(Long id, UpdateAttendeeDTO updateDTO){
+    public AttendDTO update(Long id, UpdateAttendDTO updateDTO){
 
 
         try {
@@ -58,19 +58,19 @@ public class AttendeeService {
             
             entity = repo.save(entity);
 
-            return new AttendeeDTO(entity);
+            return new AttendDTO(entity);
         } catch (EntityExistsException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Attende not Found");
         }
     }
 
 
-    public List<AttendeeDTO> toDTOList(List<Attend> list){
+    public List<AttendDTO> toDTOList(List<Attend> list){
         
-        List<AttendeeDTO> listDTO = new ArrayList<>();
+        List<AttendDTO> listDTO = new ArrayList<>();
 
         for(Attend a: list){
-            AttendeeDTO dto = new AttendeeDTO(a.getId(), a.getName(), a.getEmail(), a.getBalance());
+            AttendDTO dto = new AttendDTO(a.getId(), a.getName(), a.getEmail(), a.getBalance());
             listDTO.add(dto);
         }
         return listDTO;
