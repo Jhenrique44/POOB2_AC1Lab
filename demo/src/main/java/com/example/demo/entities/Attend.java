@@ -40,6 +40,8 @@ public class Attend extends User {
     }
 
     public Attend(InsertAttendDTO insert){
+        // this.name = insert.getName();
+        // this.email = insert.getEmail();
         this.balance = insert.getBalance();
     }
 

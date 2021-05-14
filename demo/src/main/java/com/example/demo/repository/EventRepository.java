@@ -17,11 +17,11 @@ public interface EventRepository extends JpaRepository <Event, Long>{
 
     @Query("SELECT c FROM Event c " + 
             "WHERE " + 
-            " ( LOWER(c.name)        LIKE LOWER(CONCAT('%', :name    , '%')))    AND  " + 
-            " ( LOWER(c.address)     LIKE LOWER(CONCAT('%', :address , '%'))) AND  " +
-            " ( LOWER(c.descp)        LIKE LOWER(CONCAT('%', :descp  , '%' )))   AND  " +
-            "  c.std                    >                    :std                AND  " +
-            " ( LOWER(c.email)       LIKE LOWER(CONCAT('%', :email   , '%')))"
+            " LOWER(c.name)        LIKE LOWER(CONCAT('%', :name    , '%'))    AND  " + 
+            " LOWER(c.address)     LIKE LOWER(CONCAT('%', :address , '%')) AND  " +
+            " LOWER(c.descp)        LIKE LOWER(CONCAT('%', :descp  , '%' ))   AND  " +
+            " c.std                    >                    :std                AND  " +
+            " LOWER(c.email)       LIKE LOWER(CONCAT('%', :email   , '%'))"
         )
     public Page <Event> find(Pageable pageRequest, String name, String address, String descp, LocalDate std, String email);
 

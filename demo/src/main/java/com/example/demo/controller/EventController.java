@@ -42,7 +42,7 @@ public class EventController {
         @RequestParam(value = "name",         defaultValue = "") String name,
         @RequestParam(value = "address",      defaultValue = "") String address,
         @RequestParam(value = "descp",        defaultValue = "") String descp,
-        @RequestParam(value = "std",          defaultValue = "1900-01-01") LocalDate std,
+        @RequestParam(value = "std",          defaultValue = "") LocalDate std,
         @RequestParam(value = "email",        defaultValue = "") String email
         
 

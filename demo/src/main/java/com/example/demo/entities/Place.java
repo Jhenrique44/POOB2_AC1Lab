@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.example.demo.dto.InsertPlaceDTO;
+
 
 @Entity
 @Table(name = "TB_PLACE")
@@ -43,6 +45,13 @@ public class Place implements Serializable {
         this.id = id;
         this.name = name;
         this.address = address;
+    }
+
+    public Place(InsertPlaceDTO insertDTO) {
+        
+        this.name = insertDTO.getName();
+        this.address = insertDTO.getAddress();
+        
     }
 
     public Long getId() {
