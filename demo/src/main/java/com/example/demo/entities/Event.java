@@ -35,7 +35,6 @@ public class Event implements Serializable{
 
     private String name;
     private String descp;    
-    private String address;
     private String email;
     private Long amountFreeTickets;
     private Long amountPayTickets;
@@ -71,11 +70,14 @@ public class Event implements Serializable{
 
     public Event(InsertEventDTO insertDTO) {
         this.name = insertDTO.getName();
-        this.address = insertDTO.getAddress();
         this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
         this.std = insertDTO.getStd();
         this.endate = insertDTO.getEndate();
+        this.amountFreeTickets = insertDTO.getAmountFreeTickets();
+        this.amountPayTickets = insertDTO.getAmountPayTickets();
+        this.priceTicket = insertDTO.getPriceTicket();
+
 
     }
     public Long getId() {
@@ -100,14 +102,6 @@ public class Event implements Serializable{
 
     public void setDescp(String descp) {
         this.descp = descp;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-    
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getEmail() {
@@ -229,12 +223,11 @@ public class Event implements Serializable{
         return true;
     }
 
-    public Event(Long id, String name, String descp, String address, String email, Long amountFreeTickets,
+    public Event(Long id, String name, String descp, String email, Long amountFreeTickets,
             Long amountPayTickets, Double priceTicket, LocalDate std, LocalDate endate) {
         this.id = id;
         this.name = name;
         this.descp = descp;
-        this.address = address;
         this.email = email;
         this.amountFreeTickets = amountFreeTickets;
         this.amountPayTickets = amountPayTickets;

@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class InsertEventDTO {
     
     private String name;
-    private String address;
     private String descp;
     private String email;
 
@@ -17,6 +16,10 @@ public class InsertEventDTO {
    
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endate;
+
+    private Long amountFreeTickets;
+    private Long amountPayTickets;
+    private Double priceTicket;
 
     // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     // private LocalTime startTime;
@@ -47,14 +50,6 @@ public class InsertEventDTO {
         this.descp = descp;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -80,6 +75,32 @@ public class InsertEventDTO {
         if(endate.isAfter(std))
             this.endate = endate;
     }
+
+    public Long getAmountFreeTickets() {
+        return amountFreeTickets;
+    }
+
+    public void setAmountFreeTickets(Long amountFreeTickets) {
+        this.amountFreeTickets = amountFreeTickets;
+    }
+
+    public Long getAmountPayTickets() {
+        return amountPayTickets;
+    }
+
+    public void setAmountPayTickets(Long amountPayTickets) {
+        this.amountPayTickets = amountPayTickets;
+    }
+
+    public Double getPriceTicket() {
+        return priceTicket;
+    }
+
+    public void setPriceTicket(Double priceTicket) {
+        this.priceTicket = priceTicket;
+    }
+
+    
 
     // public LocalTime getStartTime() {
     //     return startTime;

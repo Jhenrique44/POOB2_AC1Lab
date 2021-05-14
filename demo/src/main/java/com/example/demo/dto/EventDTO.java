@@ -13,7 +13,6 @@ public class EventDTO {
     private Long id;
     
     private String name;
-    private String address;
     private String descp;
     private String email;
 
@@ -27,10 +26,9 @@ public class EventDTO {
     
     }
 
-    public EventDTO(Long id, String name, String address, String descp, String email, LocalDate std, LocalDate endate) {
+    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endate) {
         this.id = id;
         this.name = name;
-        this.address = address;
         this.descp = descp;
         this.email = email;
         this.std = std;
@@ -44,7 +42,6 @@ public class EventDTO {
 
         this.id = event.getId();
         this.name = event.getName();
-        this.address = event.getAddress();
         this.descp = event.getDescp();
         this.email = event.getEmail();
         this.std = event.getStd();
@@ -67,13 +64,13 @@ public class EventDTO {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
-    }
+    // public String getAddress() {
+    //     return address;
+    // }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    // public void setAddress(String address) {
+    //     this.address = address;
+    // }
 
     
     public LocalDate getStd() {
