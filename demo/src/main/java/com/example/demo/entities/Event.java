@@ -33,6 +33,7 @@ public class Event implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long idAdmin;
     private String name;
     private String descp;    
     private String email;
@@ -69,6 +70,7 @@ public class Event implements Serializable{
     }
 
     public Event(InsertEventDTO insertDTO) {
+        this.idAdmin = admin.getId();
         this.name = insertDTO.getName();
         this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
@@ -80,6 +82,16 @@ public class Event implements Serializable{
 
 
     }
+
+    
+    public Long getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(Long idAdmin) {
+        this.idAdmin = admin.getId(); //
+    }
+
     public Long getId() {
         return id;
     }
@@ -223,18 +235,18 @@ public class Event implements Serializable{
         return true;
     }
 
-    public Event(Long id, String name, String descp, String email, Long amountFreeTickets,
-            Long amountPayTickets, Double priceTicket, LocalDate std, LocalDate endate) {
-        this.id = id;
-        this.name = name;
-        this.descp = descp;
-        this.email = email;
-        this.amountFreeTickets = amountFreeTickets;
-        this.amountPayTickets = amountPayTickets;
-        this.priceTicket = priceTicket;
-        this.std = std;
-        this.endate = endate;
-    }
+    // public Event(Long id, String name, String descp, String email, Long amountFreeTickets,
+    //         Long amountPayTickets, Double priceTicket, LocalDate std, LocalDate endate) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.descp = descp;
+    //     this.email = email;
+    //     this.amountFreeTickets = amountFreeTickets;
+    //     this.amountPayTickets = amountPayTickets;
+    //     this.priceTicket = priceTicket;
+    //     this.std = std;
+    //     this.endate = endate;
+    // }
 
     
     

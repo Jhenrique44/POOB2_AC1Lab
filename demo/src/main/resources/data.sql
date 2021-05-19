@@ -1,4 +1,5 @@
-INSERT INTO tb_event(name, descp, email, std, endate, amount_free_tickets, amount_pay_tickets, price_ticket) VALUES 
+INSERT INTO tb_event(name, descp, email, std, endate, amount_free_tickets, amount_pay_tickets, price_ticket) 
+VALUES 
 (
         'João Antonio1',
         'Rua XV, 1212 – Sorocaba-SP',
@@ -9,12 +10,6 @@ INSERT INTO tb_event(name, descp, email, std, endate, amount_free_tickets, amoun
         30,
         100.00
 );
--- INSERT INTO  tb_admin(phone_Number)
--- VALUES
--- (
---         '9999-9999'
-
--- );
 -- INSERT INTO tb_attend(balance)
 -- VALUES
 -- (
@@ -31,5 +26,12 @@ INSERT INTO tb_user(name, email)
 VALUES
 (
         'JAPA',
-        'JAPAMAM@GAMIS'
+        'JAPA@GAMeS'
 );
+-- INSERT INTO tb_admin(name, email, phone_number)
+-- VALUES
+-- (    
+--         'dsfsdf',
+--         'sdfadfadf',
+--         '9999-5555'
+-- );

@@ -36,13 +36,13 @@ public class AdminController {
         @RequestParam(value = "page",         defaultValue = "0") Integer page,
         @RequestParam(value = "linesPerPage", defaultValue = "6") Integer linesPerPage,
         @RequestParam(value = "direction",    defaultValue = "ASC") String direction,
-        @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy,
-        @RequestParam(value = "name",         defaultValue = "") String name        
+        @RequestParam(value = "orderBy",      defaultValue = "id") String orderBy
+        // @RequestParam(value = "name",         defaultValue = "") String name        
 
 
     ){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
-        Page<AdminDTO> list = service.getAdmins(pageRequest, name.trim());
+        Page<AdminDTO> list = service.getAdmins(pageRequest);
         return ResponseEntity.ok(list);
 
     }

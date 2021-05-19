@@ -1,27 +1,18 @@
 package com.example.demo.dto;
 
 import com.example.demo.entities.Admin;
+import com.example.demo.entities.User;
 
-public class AdminDTO {
+public class AdminDTO extends User{
 
+    private Long id; 
 
-    private Long id;
-    
     private String name;
-    
     private String email;
-
     private String phoneNumber;
 
     public AdminDTO(){
 
-    }
-    public AdminDTO(Long id, String name, String email, String phoneNumber){
-
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
     }
     public AdminDTO(Admin adm){
 
@@ -33,7 +24,7 @@ public class AdminDTO {
     }
 
     
-	public Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -51,6 +42,13 @@ public class AdminDTO {
         this.email = email;
     }
 
+    public AdminDTO(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public AdminDTO(Long id, String name, String email, String phoneNumber) {
+        super(id, name, email);
+        this.phoneNumber = phoneNumber;
+    }
     public String getPhoneNumber() {
         return phoneNumber;
     }

@@ -1,11 +1,14 @@
 package com.example.demo.dto;
 
-public class UpdateAdminDTO {
+import com.example.demo.entities.User;
+
+public class UpdateAdminDTO extends User {
 
     private String email;
     private String phoneNumber;
+    
 
-
+    
     public String getEmail() {
         return email;
     }

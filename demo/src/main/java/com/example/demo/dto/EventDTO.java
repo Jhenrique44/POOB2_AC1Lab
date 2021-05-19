@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 public class EventDTO {
     
     private Long id;
+    private Long idAdmin;
     
     private String name;
     private String descp;
@@ -26,7 +27,8 @@ public class EventDTO {
     
     }
 
-    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endate) {
+    public EventDTO(Long id, Long idAdmin, String name, String descp, String email, LocalDate std, LocalDate endate) {
+        this.idAdmin = idAdmin;
         this.id = id;
         this.name = name;
         this.descp = descp;
@@ -34,19 +36,32 @@ public class EventDTO {
         this.std = std;
         this.endate = endate;
 
-
     }
     
 
     public EventDTO(Event event) {
-
+    
+        this.idAdmin = event.getIdAdmin();
         this.id = event.getId();
         this.name = event.getName();
         this.descp = event.getDescp();
         this.email = event.getEmail();
         this.std = event.getStd();
         this.endate = event.getEndate();
+
+
     }
+    // public EventDTO(Event event){
+
+
+    //     setId(event.getId());
+    //     setName(event.getName());
+    //     setDescp(event.getDescp());
+    //     setEmail(event.getEmail());
+    //     setStd(event.getStd());
+    //     setEndDate(event.getEndate());
+
+    // }
 
     public Long getId() {
         return id;
@@ -55,7 +70,15 @@ public class EventDTO {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
+    public Long getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(Long idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+
     public String getName() {
         return name;
     }

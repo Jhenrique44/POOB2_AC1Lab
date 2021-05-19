@@ -28,7 +28,7 @@ public class EventService {
     @Autowired
     private EventRepository repo;
 
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String address, String descp,
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp,
     LocalDate std, String email){
         Page<Event> list = repo.find(pageRequest, name, descp, std, email);
         return list.map( c -> new EventDTO(c) );
@@ -78,7 +78,7 @@ public class EventService {
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate());
+            EventDTO dto = new EventDTO(c.getId(), c.getIdAdmin(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate());
             listDTO.add(dto);
         }
         return listDTO;

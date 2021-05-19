@@ -1,28 +1,26 @@
 package com.example.demo.dto;
 
-public class InsertAttendDTO {
-    
-    private String name;
+import com.example.demo.entities.User;
 
-    private String email;
-
+public class InsertAttendDTO extends User{
+ 
     private Double balance;
 
-    public String getName() {
-        return name;
-    }
+    // public String getName() {
+    //     return name;
+    // }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    // public void setName(String name) {
+    //     this.name = name;
+    // }
 
-    public String getEmail() {
-        return email;
-    }
+    // public String getEmail() {
+    //     return email;
+    // }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // public void setEmail(String email) {
+    //     this.email = email;
+    // }
 
     public Double getBalance() {
         return balance;
@@ -32,6 +30,16 @@ public class InsertAttendDTO {
         this.balance = balance;
     }
 
+    public InsertAttendDTO(Double balance) {
+        this.balance = balance;
+    }
+
+    public InsertAttendDTO(Long id, String name, String email, Double balance) {
+        super(id, name, email);
+        this.balance = balance;
+    }
+
+    
 
     
 }

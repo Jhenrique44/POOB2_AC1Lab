@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 public class InsertEventDTO {
     
+    private Long idAdmin;
     private String name;
     private String descp;
     private String email;
@@ -33,10 +34,19 @@ public class InsertEventDTO {
     // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
     // LocalTime timeNow = LocalTime.now();
     
+    
+    public Long getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(Long idAdmin) {
+        this.idAdmin = idAdmin;
+    }
+
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }

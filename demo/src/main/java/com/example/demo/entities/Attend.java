@@ -23,6 +23,10 @@ public class Attend extends User {
     @JoinColumn(name = "ATTEND_USER_ID")
     private List<Ticket> tickets = new ArrayList<>();
 
+    public Attend(){
+
+    }
+
     public Double getBalance() {
         return balance;
     }
@@ -39,10 +43,12 @@ public class Attend extends User {
         this.tickets.add(ticket);
     }
 
-    public Attend(InsertAttendDTO insert){
-        // this.name = insert.getName();
-        // this.email = insert.getEmail();
-        this.balance = insert.getBalance();
+    public Attend(InsertAttendDTO insertDTO){
+
+        this.setId(insertDTO.getId());
+        this.setName(insertDTO.getName());
+        this.setEmail(insertDTO.getEmail());
+        this.balance = insertDTO.getBalance();
     }
 
     public Attend(Long id, String name, String email, Double balance) {

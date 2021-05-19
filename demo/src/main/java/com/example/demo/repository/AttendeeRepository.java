@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 public interface AttendeeRepository extends JpaRepository<Attend, Long>{
     
 
-    @Query("SELECT a FROM Attend a " + 
-            "WHERE " + 
-            "( LOWER(a.name)        LIKE LOWER(CONCAT('%', :name, '%')))"
-            // "(a.balance             LIKE (CONCAT('%', :balance , '%')))"
-    )
-    public Page<Attend> find(Pageable pageRequest, String name);
+    // @Query("SELECT a FROM Attend a " + 
+    //         "WHERE " + 
+    //         "( LOWER(a.name)        LIKE LOWER(CONCAT('%', :name, '%')))"
+    //         // "(a.balance             LIKE (CONCAT('%', :balance , '%')))"
+    // )
+    // public Page<Attend> find(Pageable pageRequest);
 }

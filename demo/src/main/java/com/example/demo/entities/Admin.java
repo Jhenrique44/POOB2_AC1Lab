@@ -29,6 +29,10 @@ public class Admin extends User{
 
     public Admin(InsertAdminDTO insertDTO) {
 
+        this.setId(insertDTO.getId());
+        // this.getId();
+        this.setName(insertDTO.getName());
+        this.setEmail(insertDTO.getEmail());
         this.phoneNumber = insertDTO.getPhoneNumber();
 
     }

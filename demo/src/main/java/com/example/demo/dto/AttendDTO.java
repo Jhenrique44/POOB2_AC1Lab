@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
 import com.example.demo.entities.Attend;
+import com.example.demo.entities.User;
 
-public class AttendDTO {
+public class AttendDTO extends User{
     
     private Long id;
 
@@ -14,18 +15,23 @@ public class AttendDTO {
 
     }
     
-    public AttendDTO(Long id, String name, String email, Double balance) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.balance = balance;
-    }
     public AttendDTO(Attend attendee){
 
         this.id = attendee.getId();
         this.name = attendee.getName();
         this.email = attendee.getEmail();
         this.balance = attendee.getBalance();
+    }
+    
+
+    public AttendDTO(Double balance) {
+        
+        this.balance = balance;
+    }
+
+    public AttendDTO(Long id, String name, String email, Double balance) {
+        super(id, name, email);
+        this.balance = balance;
     }
 
     public Long getId() {

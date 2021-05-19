@@ -28,9 +28,9 @@ public class AdminService {
     private AdminRepository repo;
 
 
-    public Page<AdminDTO> getAdmins(PageRequest pageRequest, String name){
+    public Page<AdminDTO> getAdmins(PageRequest pageRequest){
 
-        Page<Admin> list = repo.find(pageRequest, name);
+        Page<Admin> list = repo.findAll(pageRequest);
         return list.map( c -> new AdminDTO(c));
     }
 
