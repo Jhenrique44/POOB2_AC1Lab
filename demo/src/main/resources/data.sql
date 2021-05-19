@@ -22,12 +22,12 @@ VALUES
         'Rua Alvared - 35'
 
 );
-INSERT INTO tb_user(name, email)
-VALUES
-(
-        'JAPA',
-        'JAPA@GAMeS'
-);
+-- INSERT INTO tb_user(name, email)
+-- VALUES
+-- (
+--         'JAPA',
+--         'JAPA@GAMeS'
+-- );
 -- INSERT INTO tb_admin(name, email, phone_number)
 -- VALUES
 -- (    

@@ -11,7 +11,9 @@ import javax.persistence.EntityNotFoundException;
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
 import com.example.demo.dto.UpdateEventDTO;
+import com.example.demo.entities.Admin;
 import com.example.demo.entities.Event;
+import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.EventRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class EventService {
     
     @Autowired
     private EventRepository repo;
+    
+    @Autowired 
+    private AdminRepository adminRepository;
 
     public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp,
     LocalDate std, String email){
@@ -43,10 +48,18 @@ public class EventService {
     }
     public EventDTO insert(InsertEventDTO insert){
 
-        Event entity = new Event(insert);
-        entity = repo.save(entity);
+        if (insert.getStd().compareTo(insert.getEndate()) > 0) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"End date must be after the Start date");
+        } else {
+            Event entity = new Event(insert);
+            // entity.setAdmin(insert.getIdAdmin());
+            Admin a1 = adminRepository.findById(insert.getIdAdmin()).get(); //looking for an Admin that matches the IdAdmin(event)
+            entity.setAdmin(a1); //enraising IdAdmin(event) with Admin(id)
+            entity = repo.save(entity);
 
-        return new EventDTO(entity);
+            return new EventDTO(entity);    
+        }
+        
     }
 
     public void delete(Long id){
@@ -62,23 +75,30 @@ public class EventService {
 
     public EventDTO update(Long id, UpdateEventDTO updateDTO){
 
-        try {
-            Event entity = repo.getOne(id);
-            entity.setName(updateDTO.getName());
-
-            entity = repo.save(entity);
-
-            return new EventDTO(entity);
-        } catch (EntityNotFoundException ex) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Event Not Found");
-        }        
+        if (updateDTO.getStd().compareTo(updateDTO.getEndDate()) > 0) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "End date must be after the Start date");
+        } else {
+            try {
+                Event entity = repo.getOne(id);
+                entity.setName(updateDTO.getName());
+                entity.setEmail(updateDTO.getEmail());
+                entity.setStd(updateDTO.getStd());
+                entity.setEndate(updateDTO.getEndDate());
+    
+                entity = repo.save(entity);
+    
+                return new EventDTO(entity);
+            } catch (EntityNotFoundException ex) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Event Not Found");
+            } 
+        }       
     }
     public List<EventDTO> toDTOList(List<Event> list) {
 
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getIdAdmin(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate());
+            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate());
             listDTO.add(dto);
         }
         return listDTO;

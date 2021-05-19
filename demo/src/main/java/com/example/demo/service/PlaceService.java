@@ -10,6 +10,7 @@ import com.example.demo.dto.InsertPlaceDTO;
 import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.UpdatePlaceDTO;
 import com.example.demo.entities.Place;
+import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.PlaceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class PlaceService {
     
     @Autowired
     private PlaceRepository repo;
+    
+    @Autowired
+    private EventRepository eventRepo;
 
     public Page<PlaceDTO> getPlaces(PageRequest pageRequest, String name, String address){
         Page<Place> list = repo.find(pageRequest, name, address);

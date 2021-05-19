@@ -70,7 +70,7 @@ public class Event implements Serializable{
     }
 
     public Event(InsertEventDTO insertDTO) {
-        this.idAdmin = admin.getId();
+        this.idAdmin = insertDTO.getIdAdmin();
         this.name = insertDTO.getName();
         this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
@@ -189,18 +189,19 @@ public class Event implements Serializable{
         return admin;
     }
 
+
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
 
 
-    public List<Place> getPlaces() {
-        return places;
-    }
+    // public List<Place> getPlaces() {
+    //     return places;
+    // }
 
-    public void addPlace(Place place) {
-        this.places.add(place);
-    }
+    // public void addPlace(Place place) {
+    //     this.places.add(place);
+    // }
 
     public List<Ticket> getTickets() {
         return tickets;
@@ -247,6 +248,7 @@ public class Event implements Serializable{
     //     this.std = std;
     //     this.endate = endate;
     // }
+    // public void addTicket(Inte)
 
     
     
