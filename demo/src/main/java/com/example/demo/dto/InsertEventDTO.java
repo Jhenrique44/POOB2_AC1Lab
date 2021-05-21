@@ -1,9 +1,9 @@
 package com.example.demo.dto;
 
 import java.time.LocalDate;
-// import java.time.LocalTime;
+import java.time.LocalTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
+// import org.springframework.format.annotation.DateTimeFormat;
 
 public class InsertEventDTO {
     
@@ -13,10 +13,10 @@ public class InsertEventDTO {
     private String descp;
     private String email;
 
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    // @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate std;
    
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    // @DateTimeFormat(pattern = "dd/MM/yyyy")
     private LocalDate endate;
 
     private Long amountFreeTickets;
@@ -24,16 +24,16 @@ public class InsertEventDTO {
     private Double priceTicket;
 
     // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    // private LocalTime startTime;
+    private LocalTime startTime;
     
     // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    // private LocalTime endTime;
+    private LocalTime endTime;
     
     // @DateTimeFormat(pattern = "dd/MM/yyyy")
-    // LocalDate dateToday = LocalDate.now();
+    LocalDate dateToday = LocalDate.now();
 
     // @DateTimeFormat(pattern = "HH:mm:ss.SSS")
-    // LocalTime timeNow = LocalTime.now();
+    LocalTime timeNow = LocalTime.now();
     
     
     public Long getIdAdmin() {
@@ -122,21 +122,21 @@ public class InsertEventDTO {
 
     
 
-    // public LocalTime getStartTime() {
-    //     return startTime;
-    // }
+    public LocalTime getStartTime() {
+        return startTime;
+    }
 
-    // public void setStartTime(LocalTime startTime) {
-    //     if(startTime.isAfter(timeNow))
-    //         this.startTime = startTime;
-    // }
-    // public LocalTime getEndTime() {
-    //     return endTime;
-    // }
-    // public void setEndTime(LocalTime endTime) {
-    //     if(endTime.isAfter(startTime))    
-    //         this.endTime = endTime;
-    // }
+    public void setStartTime(LocalTime startTime) {
+        // if(startTime.isAfter(timeNow))
+            this.startTime = startTime;
+    }
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+    public void setEndTime(LocalTime endTime) {
+        // if(endTime.isAfter(startTime))    
+            this.endTime = endTime;
+    }
 
     
 }

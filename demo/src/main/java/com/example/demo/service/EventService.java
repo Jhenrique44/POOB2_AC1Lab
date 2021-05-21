@@ -125,7 +125,8 @@ public class EventService {
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate());
+            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate(),
+                                 c.getStartTime(),c.getEndTime());
             listDTO.add(dto);
         }
         return listDTO;

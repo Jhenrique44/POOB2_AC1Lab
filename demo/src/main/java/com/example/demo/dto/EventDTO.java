@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.example.demo.entities.Event;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,11 +24,18 @@ public class EventDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate endate;
 
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime startTime;
+    @JsonFormat(pattern = "HH:mm:ss")
+    private LocalTime endTime;
+
     public EventDTO(){
     
     }
 
-    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endate) {
+    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endate, LocalTime startTime,
+    LocalTime endTime) {
+
         // this.idAdmin = idAdmin;
         this.id = id;
         this.name = name;
@@ -35,6 +43,8 @@ public class EventDTO {
         this.email = email;
         this.std = std;
         this.endate = endate;
+        this.startTime = startTime;
+        this.endTime = endTime;
 
     }
     
@@ -48,6 +58,8 @@ public class EventDTO {
         this.email = event.getEmail();
         this.std = event.getStd();
         this.endate = event.getEndate();
+        this.startTime = event.getStartTime();
+        this.endTime = event.getEndTime();
 
 
     }
@@ -116,6 +128,22 @@ public class EventDTO {
         } catch (DataAccessException e) {
             System.out.println("invalid Date ");
         }
+    }
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
     

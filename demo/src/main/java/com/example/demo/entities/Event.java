@@ -3,10 +3,11 @@ package com.example.demo.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-// import java.time.LocalTime;
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,12 +42,14 @@ public class Event implements Serializable{
     private Long amountFreeTickets;
     private Long amountPayTickets;
     private Double priceTicket;
+
+    @Column(unique = true)
     private LocalDate std;
+
+    @Column(unique = true)
     private LocalDate endate;
-    // private LocalTime startTime;
-    // private LocalTime endTime;
-    //LocalDate dateToday;
-    // LocalTime hourNow;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     @ManyToOne // N events have one admin 
     @JoinColumn(name = "ADMIN_USER_ID")
@@ -77,10 +80,11 @@ public class Event implements Serializable{
         this.email = insertDTO.getEmail();
         this.std = insertDTO.getStd();
         this.endate = insertDTO.getEndate();
+        this.startTime = insertDTO.getStartTime();
+        this.endTime = insertDTO.getEndTime();
         this.amountFreeTickets = insertDTO.getAmountFreeTickets();
         this.amountPayTickets = insertDTO.getAmountPayTickets();
         this.priceTicket = insertDTO.getPriceTicket();
-
 
     }
 
@@ -144,23 +148,22 @@ public class Event implements Serializable{
         this.endate = endate;
     }
 
-    // public LocalTime getStartTime() {
-    //     return startTime;
-    // }
+    public LocalTime getStartTime() {
+        return startTime;
+    }
 
-    // public void setStartTime(LocalTime startTime) {
-    //     if(startTime.isAfter(hourNow)) 
-    //         this.startTime = startTime;
-    // }
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
 
-    // public LocalTime getEndTime() {
-    //     return endTime;
-    // }
+    public LocalTime getEndTime() {
+        return endTime;
+    }
 
-    // public void setEndTime(LocalTime endTime) {
-    //     if(endTime.isAfter(startTime))
-    //         this.endTime = endTime;
-    // }
+    public void setEndTime(LocalTime endTime) {
+        if(endTime.isAfter(startTime))
+            this.endTime = endTime;
+    }
 
     public Long getAmountFreeTickets() {
         return amountFreeTickets;
