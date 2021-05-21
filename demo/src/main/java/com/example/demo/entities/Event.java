@@ -33,7 +33,8 @@ public class Event implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long idAdmin;
+    // private Long idAdmin;
+    // private Long idPlace;
     private String name;
     private String descp;    
     private String email;
@@ -70,7 +71,7 @@ public class Event implements Serializable{
     }
 
     public Event(InsertEventDTO insertDTO) {
-        this.idAdmin = insertDTO.getIdAdmin();
+        // this.idAdmin = insertDTO.getIdAdmin();
         this.name = insertDTO.getName();
         this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
@@ -84,13 +85,13 @@ public class Event implements Serializable{
     }
 
     
-    public Long getIdAdmin() {
-        return idAdmin;
-    }
+    // public Long getIdAdmin() {
+    //     return idAdmin;
+    // }
 
-    public void setIdAdmin(Long idAdmin) {
-        this.idAdmin = admin.getId(); //
-    }
+    // public void setIdAdmin(Long idAdmin) {
+    //     this.idAdmin = admin.getId(); //
+    // }
 
     public Long getId() {
         return id;
@@ -195,13 +196,13 @@ public class Event implements Serializable{
     }
 
 
-    // public List<Place> getPlaces() {
-    //     return places;
-    // }
+    public List<Place> getPlaces() {
+        return places;
+    }
 
-    // public void addPlace(Place place) {
-    //     this.places.add(place);
-    // }
+    public void addPlace(Place place) {
+        this.places.add(place);
+    }
 
     public List<Ticket> getTickets() {
         return tickets;
@@ -236,19 +237,6 @@ public class Event implements Serializable{
         return true;
     }
 
-    // public Event(Long id, String name, String descp, String email, Long amountFreeTickets,
-    //         Long amountPayTickets, Double priceTicket, LocalDate std, LocalDate endate) {
-    //     this.id = id;
-    //     this.name = name;
-    //     this.descp = descp;
-    //     this.email = email;
-    //     this.amountFreeTickets = amountFreeTickets;
-    //     this.amountPayTickets = amountPayTickets;
-    //     this.priceTicket = priceTicket;
-    //     this.std = std;
-    //     this.endate = endate;
-    // }
-    // public void addTicket(Inte)
 
     
     

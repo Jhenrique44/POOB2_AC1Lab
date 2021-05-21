@@ -51,17 +51,7 @@ public class EventDTO {
 
 
     }
-    // public EventDTO(Event event){
-
-
-    //     setId(event.getId());
-    //     setName(event.getName());
-    //     setDescp(event.getDescp());
-    //     setEmail(event.getEmail());
-    //     setStd(event.getStd());
-    //     setEndDate(event.getEndate());
-
-    // }
+    
 
     public Long getId() {
         return id;

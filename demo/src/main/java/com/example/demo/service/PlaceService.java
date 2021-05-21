@@ -9,9 +9,11 @@ import javax.persistence.EntityNotFoundException;
 import com.example.demo.dto.InsertPlaceDTO;
 import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.UpdatePlaceDTO;
+import com.example.demo.entities.Event;
 import com.example.demo.entities.Place;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.PlaceRepository;
+import com.fasterxml.jackson.databind.exc.InvalidNullException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -47,9 +49,17 @@ public class PlaceService {
     public PlaceDTO insert(InsertPlaceDTO insert){
 
         Place entity = new Place(insert);
-        entity =  repo.save(entity);
+        try { 
+            Event e = eventRepo.findById(insert.getIdEvent()).get();
 
-        return new PlaceDTO(entity);
+            entity.addEvent(e);
+
+            entity = repo.save(entity);
+            return new PlaceDTO(entity);
+            
+        } catch (Exception e) {  //using generical
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not Found");
+        }
 
     }
 

@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class InsertEventDTO {
     
     private Long idAdmin;
+    private Long idPlace;
     private String name;
     private String descp;
     private String email;
@@ -41,6 +42,15 @@ public class InsertEventDTO {
 
     public void setIdAdmin(Long idAdmin) {
         this.idAdmin = idAdmin;
+    }
+
+    
+    public Long getIdPlace() {
+        return idPlace;
+    }
+
+    public void setIdPlace(Long idPlace) {
+        this.idPlace = idPlace;
     }
 
     public String getName() {
