@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.Instant;
 import java.time.LocalDate;
 // import java.time.LocalDate;
 import java.util.ArrayList;
@@ -14,9 +15,12 @@ import com.example.demo.dto.UpdateEventDTO;
 import com.example.demo.entities.Admin;
 import com.example.demo.entities.Event;
 import com.example.demo.entities.Place;
+import com.example.demo.entities.Ticket;
+import com.example.demo.entities.TicketType;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.PlaceRepository;
+import com.example.demo.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -37,6 +41,9 @@ public class EventService {
 
     @Autowired 
     private PlaceRepository placeRepository;
+
+    @Autowired
+    private TicketRepository ticketRepository;
 
     public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp,
     LocalDate std, String email){
@@ -62,7 +69,6 @@ public class EventService {
                 
                 Admin a = adminRepository.findById(insert.getIdAdmin()).get();
                 entity.setAdmin(a);
-
                 // entity = repo.save(entity);
             } catch (Exception e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Admin not found");
@@ -72,6 +78,18 @@ public class EventService {
                 Place p = placeRepository.findById(insert.getIdPlace()).get();
                 entity.addPlace(p);
 
+                Ticket t = new Ticket();
+                t.setDate(Instant.now());
+                t.setType(TicketType.PAID);
+                t.setPrice(entity.getPriceTicket());
+                // if(t.setType(TicketType.PAID) = true){
+                //     t.setPrice(entity.getPriceTicket());
+                // }else{
+                //     t.setPrice(0.0);
+                // }
+                // t.setPrice(entity.getPriceTicket());
+                
+                entity.addTicket(t);
                 entity = repo.save(entity);
                 return new EventDTO(entity);
 

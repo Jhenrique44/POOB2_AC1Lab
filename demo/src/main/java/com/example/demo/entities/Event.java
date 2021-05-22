@@ -65,7 +65,7 @@ public class Event implements Serializable{
     private List<Place> places = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.PERSIST) //One event have N tickets 
-    @JoinColumn(name = "EVENT_ADMIN_ID")
+    @JoinColumn(name = "EVENT_ID")
     private List<Ticket> tickets = new ArrayList<>();
 
     
