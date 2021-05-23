@@ -4,24 +4,6 @@
 
 JSON requirement for injection <POST>
     
-"Attendees"
-
-{ 
-    "name": "Martin",
-    "email": " martin@ig.com", 
-    "balance": 5555.44
-}
-{ 
-    "name": "Ethan",
-    "email": "ethan@ig.com", 
-    "balance": 5555.44
-}
-{ 
-    "name": "Mia",
-    "email": "mia@ig.com", 
-    "balance": 100.44
-}
-
 "Admins"
 
 { 
@@ -42,24 +24,42 @@ JSON requirement for injection <POST>
     "phoneNumber": "9999-4445"
 }
 
+"Attendees"
+
+{ 
+    "name": "Martin",
+    "email": " martin@ig.com", 
+    "balance": 5555.44
+}
+{ 
+    "name": "Ethan",
+    "email": "ethan@ig.com", 
+    "balance": 5555.44
+}
+{ 
+    "name": "Mia",
+    "email": "mia@ig.com", 
+    "balance": 100.44
+}
+
 "Event"
 
 { 
     "idAdmin": 1, 
     "idPlace": 1,
     "name": "Rock Festival",
-    "desc": "Festival full of old school rock",
+    "descp": "Festival full of old school rock",
     "email": "RockFestival@ig.com",
-    "startDate": "2022-03-20",
-    "endDate": "2022-03-30",
-    "startTime": "20:44:00.000",
-    "endTime":  "06:30:00.000",
+    "std": "2070-06-21",
+    "endate": "2080-06-29",
+    "startTime": "09:30:00",
+    "endTime":  "19:30:00",
     "amountPayTickets": 500,
     "amountFreeTickets": 100,
     "priceTicket": 100
 }
 {
-    "idAdmin": 3,
+    "idAdmin": 1,
     "idPlace": 1,
     "name": "Casamento ",
     "descp": "Casamento dos backers",
