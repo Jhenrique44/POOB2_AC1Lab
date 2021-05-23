@@ -30,9 +30,9 @@ public class AttendService {
     @Autowired 
     private TicketRepository ticketRepo;
 
-    public Page<AttendDTO> getAttendees(PageRequest pageRequest){
+    public Page<AttendDTO> getAttendees(PageRequest pageRequest, String name){
         
-        Page<Attend> list = repo.findAll(pageRequest);
+        Page<Attend> list = repo.find(pageRequest, name );
         
         return list.map( c -> new AttendDTO(c) );
     }

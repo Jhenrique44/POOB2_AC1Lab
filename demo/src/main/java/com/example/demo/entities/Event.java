@@ -37,7 +37,8 @@ public class Event implements Serializable{
     // private Long idAdmin;
     // private Long idPlace;
     private String name;
-    private String descp;    
+    private String descp;
+    @Column(unique = true)
     private String email;
     private Long amountFreeTickets;
     private Long amountPayTickets;

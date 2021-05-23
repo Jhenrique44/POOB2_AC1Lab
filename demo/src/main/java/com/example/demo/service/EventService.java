@@ -45,9 +45,8 @@ public class EventService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp,
-    LocalDate std, String email){
-        Page<Event> list = repo.find(pageRequest, name, descp, std, email);
+    public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp, String email){
+        Page<Event> list = repo.find(pageRequest, name, descp, email);
         return list.map( c -> new EventDTO(c) );
     }
 
@@ -79,8 +78,8 @@ public class EventService {
                 entity.addPlace(p);
 
                 Ticket t = new Ticket();
-                t.setDate(Instant.now());
-                t.setType(TicketType.PAID);
+                // t.setDate(Instant.now());
+                // t.setType(TicketType.PAID);
                 t.setPrice(entity.getPriceTicket());
                 // if(t.setType(TicketType.PAID) = true){
                 //     t.setPrice(entity.getPriceTicket());
