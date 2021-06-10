@@ -11,13 +11,17 @@ import javax.persistence.EntityNotFoundException;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
+import com.example.demo.dto.InsertTicketDTO;
+import com.example.demo.dto.TicketDTO;
 import com.example.demo.dto.UpdateEventDTO;
 import com.example.demo.entities.Admin;
+import com.example.demo.entities.Attend;
 import com.example.demo.entities.Event;
 import com.example.demo.entities.Place;
 import com.example.demo.entities.Ticket;
 import com.example.demo.entities.TicketType;
 import com.example.demo.repository.AdminRepository;
+import com.example.demo.repository.AttendeeRepository;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.PlaceRepository;
 import com.example.demo.repository.TicketRepository;
@@ -44,6 +48,9 @@ public class EventService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private AttendeeRepository attendeeRepository;
 
     public Page<EventDTO> getEvents(PageRequest pageRequest, String name, String descp, String email){
         Page<Event> list = repo.find(pageRequest, name, descp, email);
@@ -137,6 +144,56 @@ public class EventService {
         }
         
     }
+
+    //Requisição  GET /{idEvent}/tickets 
+    public Event getTicketEventById(Long id){
+        Optional<Event> op = repo.findById(id);
+        Event event = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        
+        return new Event(event);
+
+    }
+    //Requisição POST /{idevent}/tickets
+    public TicketDTO insertTicket(InsertTicketDTO insertTicketDTO, Long idEvent){
+
+        Ticket entity = new Ticket(insertTicketDTO);
+        try {
+                
+            Event e = repo.findById(idEvent).get();
+            // ticketRepository.findById(insertTicketDTO.getIdAttend()).get();
+                    
+            e.addTicket(entity);
+
+            entity = ticketRepository.save(entity);
+            
+
+            return new TicketDTO(entity);
+        
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "idEvent not Found");
+        }
+
+
+
+    }
+    // DELETE /{idEvent}/tickets
+    public void deleteTicket(Long idEvent){
+
+        try {
+            
+            Event e = repo.findById(idEvent).get();
+
+            ticketRepository.deleteAll(e.getTickets());
+
+
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
+        }
+
+    }
+
+
+    
     public List<EventDTO> toDTOList(List<Event> list) {
 
         List<EventDTO> listDTO = new ArrayList<>();
@@ -150,3 +207,4 @@ public class EventService {
 
     }
 }
+

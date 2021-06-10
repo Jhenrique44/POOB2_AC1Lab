@@ -3,11 +3,17 @@ package com.example.demo.controller;
 import java.net.URI;
 // import java.time.LocalDate;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.example.demo.dto.EventDTO;
 import com.example.demo.dto.InsertEventDTO;
+import com.example.demo.dto.InsertTicketDTO;
+import com.example.demo.dto.TicketDTO;
 import com.example.demo.dto.UpdateEventDTO;
+import com.example.demo.entities.Event;
+import com.example.demo.entities.Ticket;
 import com.example.demo.service.EventService;
+import com.example.demo.service.TicketService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -31,6 +37,9 @@ public class EventController {
     
     @Autowired
     private EventService service;
+
+    @Autowired
+    private TicketService ticketService;
 
     @GetMapping
     public ResponseEntity<Page<EventDTO>> getEvents(
@@ -80,4 +89,50 @@ public class EventController {
         return ResponseEntity.ok().body(dto);
         
     }
+
+    //Events/id/tickets
+    // @GetMapping("/{id}/tickets")
+    // public ResponseEntity<Ticket> getTicketByEvent(@PathVariable Long id){
+
+    //     Ticket ticket = ticketService.getTicketByEvent(id);   
+    //     return ResponseEntity.ok(ticket);
+
+    // }
+    @GetMapping("/{id}/tickets")
+    public List<Ticket> getTicketEventById(@PathVariable Long id){
+        
+        Event event = service.getTicketEventById(id);
+        return event.getTickets();
+
+    }
+
+    //events/{id}/places/{id}
+    // @PostMapping("/events/{id}/places/{idp}")
+    // public ResponseEntity<Void> insertEP(@PathVariable id, @pa )
+
+    //events/{id}/places/{id}
+    // @DeleteMapping("/events/{id}/places/{id}")
+
+    //
+
+    @PostMapping("/{id}/tickets")
+    public ResponseEntity<TicketDTO> insertTicket(@PathVariable Long idEvent, @RequestBody InsertTicketDTO insertDTO){
+    
+        TicketDTO dto = service.insertTicket(insertDTO, idEvent);
+
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(dto);
+
+
+    }
+
+    // @DeleteMapping("{id}/tickets")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long idEvent){
+
+        service.deleteTicket(idEvent);
+        return ResponseEntity.noContent().build();
+
+    }
+
 }

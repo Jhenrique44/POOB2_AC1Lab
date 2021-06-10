@@ -11,7 +11,7 @@ import com.example.demo.dto.InsertAttendDTO;
 import com.example.demo.dto.UpdateAttendDTO;
 import com.example.demo.entities.Attend;
 import com.example.demo.repository.AttendeeRepository;
-import com.example.demo.repository.TicketRepository;
+// import com.example.demo.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -27,8 +27,8 @@ public class AttendService {
     @Autowired
     private AttendeeRepository repo;
 
-    @Autowired 
-    private TicketRepository ticketRepo;
+    // @Autowired 
+    // private TicketRepository ticketRepo;
 
     public Page<AttendDTO> getAttendees(PageRequest pageRequest, String name){
         

@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.dto.InsertTicketDTO;
+import com.example.demo.dto.TicketDTO;
+
 @Entity
 @Table(name = "TB_TICKET")
 public class Ticket implements Serializable {
@@ -27,13 +30,22 @@ public class Ticket implements Serializable {
 
 
     }
+    public Ticket(InsertTicketDTO insertDTO){
 
+        this.price = insertDTO.getPrice();
+        this.type = insertDTO.getType();
+        this.date = insertDTO.getDate();
+
+
+    }
     public Ticket(Long id, TicketType type, Instant date, Double price) {
         this.id = id;
         this.type = type;
         this.date = date;
         this.price = price;
     }
+
+
 
     public Long getId() {
         return id;

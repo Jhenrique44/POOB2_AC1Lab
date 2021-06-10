@@ -90,6 +90,7 @@ public class Event implements Serializable{
     }
 
     
+    
     // public Long getIdAdmin() {
     //     return idAdmin;
     // }
@@ -97,6 +98,14 @@ public class Event implements Serializable{
     // public void setIdAdmin(Long idAdmin) {
     //     this.idAdmin = admin.getId(); //
     // }
+    public Event (Event event){
+
+        this.tickets = event.getTickets();
+    }
+    public Event(List<Place> places, List<Ticket> tickets) {
+        this.places = places;
+        this.tickets = tickets;
+    }
 
     public Long getId() {
         return id;
