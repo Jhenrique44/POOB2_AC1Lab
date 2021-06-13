@@ -13,7 +13,7 @@ import com.example.demo.entities.Event;
 import com.example.demo.entities.Place;
 import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.PlaceRepository;
-import com.fasterxml.jackson.databind.exc.InvalidNullException;
+// import com.fasterxml.jackson.databind.exc.InvalidNullException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -50,9 +50,9 @@ public class PlaceService {
 
         Place entity = new Place(insert);
         try { 
-            Event e = eventRepo.findById(insert.getIdEvent()).get();
+            // Event e = eventRepo.findById(insert.getIdEvent()).get();
 
-            entity.addEvent(e);
+            // entity.addEvent(e);
 
             entity = repo.save(entity);
             return new PlaceDTO(entity);

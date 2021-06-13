@@ -6,8 +6,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.example.demo.dto.EventDTO;
+import com.example.demo.dto.GetTicketByEventDTO;
 import com.example.demo.dto.InsertEventDTO;
+import com.example.demo.dto.InsertPlaceDTO;
 import com.example.demo.dto.InsertTicketDTO;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.TicketDTO;
 import com.example.demo.dto.UpdateEventDTO;
 import com.example.demo.entities.Event;
@@ -98,24 +101,44 @@ public class EventController {
     //     return ResponseEntity.ok(ticket);
 
     // }
-    @GetMapping("/{id}/tickets")
-    public List<Ticket> getTicketEventById(@PathVariable Long id){
-        
-        Event event = service.getTicketEventById(id);
-        return event.getTickets();
+    // @GetMapping("{id}/tickets")
+    // public List<Ticket> getTicketEventById(@PathVariable Long id){
+    
+
+    // }
+
+    @GetMapping("{id}/ticketsInfo")
+    public GetTicketByEventDTO getTicketsInfo(@PathVariable Long id){
+
+        return service.getTicketEventById(id);
+
+    }
+
+
+    //events/{id}/places/{id}
+    @PostMapping("{idEvent}/places/{idPlace}")
+    public ResponseEntity<Void> insertEP(@PathVariable Long idEvent, @PathVariable Long idPlace){
+
+        service.insertPlaceEvent(idEvent, idPlace);
+
+        // URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(dto.getId()).toUri();
+
+        return ResponseEntity.ok().build();
 
     }
 
     //events/{id}/places/{id}
-    // @PostMapping("/events/{id}/places/{idp}")
-    // public ResponseEntity<Void> insertEP(@PathVariable id, @pa )
+    @DeleteMapping("{idEvent}/places/{idPlace}")
+    public ResponseEntity<Void> deleteEP(@PathVariable Long idEvent, @PathVariable Long idPlace){
 
-    //events/{id}/places/{id}
-    // @DeleteMapping("/events/{id}/places/{id}")
+        service.deletePlaceEvent(idEvent, idPlace);
 
-    //
+        return ResponseEntity.noContent().build();
+    }
 
-    @PostMapping("/{id}/tickets")
+    
+
+    @PostMapping("{id}/tickets")
     public ResponseEntity<TicketDTO> insertTicket(@PathVariable Long idEvent, @RequestBody InsertTicketDTO insertDTO){
     
         TicketDTO dto = service.insertTicket(insertDTO, idEvent);
@@ -127,7 +150,7 @@ public class EventController {
 
     }
 
-    // @DeleteMapping("{id}/tickets")
+    @DeleteMapping("{id}/tickets")
     public ResponseEntity<Void> deleteTicket(@PathVariable Long idEvent){
 
         service.deleteTicket(idEvent);

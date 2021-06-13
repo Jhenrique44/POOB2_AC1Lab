@@ -3,6 +3,10 @@ package com.example.demo.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 // import org.springframework.format.annotation.DateTimeFormat;
 
 public class InsertEventDTO {
@@ -13,11 +17,11 @@ public class InsertEventDTO {
     private String descp;
     private String email;
 
-    // @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate std;
    
-    // @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private LocalDate endate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate endDate;
 
     private Long amountFreeTickets;
     private Long amountPayTickets;
@@ -87,13 +91,13 @@ public class InsertEventDTO {
         this.std = std;
     }
 
-    public LocalDate getEndate() {
-        return endate;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEndate(LocalDate endate) {
-        if(endate.isAfter(std))
-            this.endate = endate;
+    public void setEndDate(LocalDate endDate) {
+        if(endDate.isAfter(std))
+            this.endDate = endDate;
     }
 
     public Long getAmountFreeTickets() {

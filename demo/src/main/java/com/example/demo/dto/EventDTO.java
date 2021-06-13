@@ -22,7 +22,7 @@ public class EventDTO {
     private LocalDate std;
     
     @JsonFormat(pattern = "yyyy-MM-dd")
-    private LocalDate endate;
+    private LocalDate endDate;
 
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime startTime;
@@ -33,7 +33,7 @@ public class EventDTO {
     
     }
 
-    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endate, LocalTime startTime,
+    public EventDTO(Long id, String name, String descp, String email, LocalDate std, LocalDate endDate, LocalTime startTime,
     LocalTime endTime) {
 
         // this.idAdmin = idAdmin;
@@ -42,7 +42,7 @@ public class EventDTO {
         this.descp = descp;
         this.email = email;
         this.std = std;
-        this.endate = endate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
 
@@ -57,7 +57,7 @@ public class EventDTO {
         this.descp = event.getDescp();
         this.email = event.getEmail();
         this.std = event.getStd();
-        this.endate = event.getEndate();
+        this.endDate = event.getEndDate();
         this.startTime = event.getStartTime();
         this.endTime = event.getEndTime();
 
@@ -116,15 +116,15 @@ public class EventDTO {
         this.email = email;
     }
 
-    public LocalDate getEndate() {
-        return endate;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEndDate(LocalDate endate) {
+    public void setEndDate(LocalDate endDate) {
         
         try {
-            if(endate.isAfter(std))
-                this.endate = endate;
+            if(endDate.isAfter(std))
+                this.endDate = endDate;
         } catch (DataAccessException e) {
             System.out.println("invalid Date ");
         }

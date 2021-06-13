@@ -13,7 +13,7 @@
 --         10000.00
 -- );
 INSERT INTO tb_event(
-        name, descp, email, std, endate, amount_free_tickets, amount_pay_tickets, price_ticket, start_time, end_time
+        name, descp, email, std, end_date, amount_free_tickets, amount_pay_tickets, price_ticket, start_time, end_time
 ) 
 VALUES 
 (
@@ -30,7 +30,7 @@ VALUES
 );
 
 INSERT INTO tb_event(
-        name, descp, email, std, endate, amount_free_tickets, amount_pay_tickets, price_ticket, start_time, end_time
+        name, descp, email, std, end_date, amount_free_tickets, amount_pay_tickets, price_ticket, start_time, end_time
 ) 
 VALUES 
 (

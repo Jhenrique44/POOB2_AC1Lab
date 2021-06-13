@@ -3,7 +3,7 @@ package com.example.demo.dto;
 public class InsertPlaceDTO {
     
 
-    private Long idEvent;
+    // private Long idEvent;
 
     private String name;
 
@@ -27,13 +27,13 @@ public class InsertPlaceDTO {
         this.address = address;
     }
 
-    public Long getIdEvent() {
-        return idEvent;
-    }
+    // public Long getIdEvent() {
+    //     return idEvent;
+    // }
 
-    public void setIdEvent(Long idEvent) {
-        this.idEvent = idEvent;
-    }
+    // public void setIdEvent(Long idEvent) {
+    //     this.idEvent = idEvent;
+    // }
 
 
     

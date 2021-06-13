@@ -5,13 +5,18 @@ import java.time.LocalDate;
 // import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 
 import com.example.demo.dto.EventDTO;
+import com.example.demo.dto.GetTicketByEventDTO;
 import com.example.demo.dto.InsertEventDTO;
+import com.example.demo.dto.InsertPlaceDTO;
 import com.example.demo.dto.InsertTicketDTO;
+import com.example.demo.dto.PlaceDTO;
 import com.example.demo.dto.TicketDTO;
 import com.example.demo.dto.UpdateEventDTO;
 import com.example.demo.entities.Admin;
@@ -66,7 +71,7 @@ public class EventService {
     }
     public EventDTO insert(InsertEventDTO insert){
 
-        if (insert.getStd().compareTo(insert.getEndate()) > 0) {
+        if (insert.getStd().compareTo(insert.getEndDate()) > 0) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,"End date must be after the Start date");
         } else {
 
@@ -76,13 +81,13 @@ public class EventService {
                 Admin a = adminRepository.findById(insert.getIdAdmin()).get();
                 entity.setAdmin(a);
                 // entity = repo.save(entity);
-            } catch (Exception e) {
+            } catch (NoSuchElementException e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Admin not found");
             }    
             try {
 
-                Place p = placeRepository.findById(insert.getIdPlace()).get();
-                entity.addPlace(p);
+                // Place p = placeRepository.findById(insert.getIdPlace()).get();
+                // entity.addPlace(p);
 
                 Ticket t = new Ticket();
                 // t.setDate(Instant.now());
@@ -99,7 +104,7 @@ public class EventService {
                 entity = repo.save(entity);
                 return new EventDTO(entity);
 
-            } catch (Exception e) {
+            } catch (NoSuchElementException e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Place not found");
             }
         }
@@ -122,7 +127,7 @@ public class EventService {
 
     public EventDTO update(Long id, UpdateEventDTO updateDTO){
 
-        if (updateDTO.getStd().compareTo(updateDTO.getEndDate()) > 0) {
+        if (updateDTO.getEndDate().isBefore(updateDTO.getStd())) {
 
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "End date must be after the Start date");
 
@@ -133,7 +138,11 @@ public class EventService {
                 entity.setName(updateDTO.getName());
                 entity.setEmail(updateDTO.getEmail());
                 entity.setStd(updateDTO.getStd());
-                entity.setEndate(updateDTO.getEndDate());
+                entity.setEndDate(updateDTO.getEndDate());
+                entity.setStartTime(updateDTO.getStartTime());
+                entity.setEndTime(updateDTO.getEndTime());
+                entity.setAmountFreeTickets(updateDTO.getAmountFreeTickets());
+                entity.setAmountPayTickets(updateDTO.getAmountPaytickets());
     
                 entity = repo.save(entity);
     
@@ -146,11 +155,23 @@ public class EventService {
     }
 
     //Requisição  GET /{idEvent}/tickets 
-    public Event getTicketEventById(Long id){
+    public GetTicketByEventDTO getTicketEventById(Long id){
         Optional<Event> op = repo.findById(id);
-        Event event = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        Event event = op.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
+        GetTicketByEventDTO dto = new GetTicketByEventDTO(); 
         
-        return new Event(event);
+        for (Ticket ticket : event.getTickets()) {
+            if (ticket.getType().equals(TicketType.FREE)) {
+                dto.setTotalSelledFree(dto.getTotalSelledFree()+1);
+            } else {
+                dto.setTotalSelledPayd(dto.getTotalSelledPayd()+1);
+            }
+        }
+
+        dto.setTotalAmountFree(dto.getTotalSelledFree() + event.getAmountFreeTickets());
+        dto.setTotalAmountPayd(dto.getTotalAmountPayd() + event.getAmountPayTickets());
+
+        return dto;
 
     }
     //Requisição POST /{idevent}/tickets
@@ -169,7 +190,7 @@ public class EventService {
 
             return new TicketDTO(entity);
         
-        } catch (Exception e) {
+        } catch (NoSuchElementException r) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "idEvent not Found");
         }
 
@@ -199,12 +220,67 @@ public class EventService {
         List<EventDTO> listDTO = new ArrayList<>();
             
         for (Event c : list){
-            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndate(),
+            EventDTO dto = new EventDTO(c.getId(), c.getName(), c.getDescp(), c.getEmail(), c.getStd(), c.getEndDate(),
                                  c.getStartTime(),c.getEndTime());
             listDTO.add(dto);
         }
         return listDTO;
 
     }
-}
 
+    public void insertPlaceEvent(Long idEvent, Long idPlace) {
+        // public LocalDate today;
+        try {
+            Event e = repo.findById(idEvent).get();
+            
+            if(e.getEndDate().isBefore(LocalDate.now()))
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Event date already finished");
+            else{
+
+                try {
+                    Place p = placeRepository.findById(idPlace).get();
+
+                    p.addEvent(e);
+                    // e.addPlace(p);
+
+                    // repo.save(e);
+                    placeRepository.save(p);
+                    
+                } catch (NoSuchElementException r) {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Place not found");            
+                }
+            }
+        } catch (NoSuchElementException r) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Event not found");
+        }
+
+    }
+
+    public void deletePlaceEvent(Long idEvent, Long idPlace){
+
+        try {
+            Event e = repo.findById(idEvent).get();
+            
+            if(e.getEndDate().isBefore(LocalDate.now()))
+                throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Event date already finished");
+            else{
+
+                try {
+                    Place p = placeRepository.findById(idPlace).get();
+                    
+                    // placeRepository.deleteAll(e.getPlaces());
+                    // placeRepository.deleteInBatch(e.getPlaces());
+                    p.getEvents().clear();
+
+                    // repo.deleteAll(p.getEvents());
+                    
+                } catch (NoSuchElementException r) {
+                    throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Place not found");            
+                }
+            }
+        } catch (NoSuchElementException r) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Event not found");
+        }
+
+    } 
+}

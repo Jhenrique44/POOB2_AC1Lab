@@ -44,11 +44,12 @@ public class Event implements Serializable{
     private Long amountPayTickets;
     private Double priceTicket;
 
-    @Column(unique = true)
+    // @Column(unique = true)
     private LocalDate std;
 
-    @Column(unique = true)
-    private LocalDate endate;
+    // @Column(unique = true)
+    private LocalDate endDate;
+
     private LocalTime startTime;
     private LocalTime endTime;
 
@@ -80,7 +81,7 @@ public class Event implements Serializable{
         this.descp = insertDTO.getDescp();
         this.email = insertDTO.getEmail();
         this.std = insertDTO.getStd();
-        this.endate = insertDTO.getEndate();
+        this.endDate = insertDTO.getEndDate();
         this.startTime = insertDTO.getStartTime();
         this.endTime = insertDTO.getEndTime();
         this.amountFreeTickets = insertDTO.getAmountFreeTickets();
@@ -149,13 +150,13 @@ public class Event implements Serializable{
         this.std = std;
     }
 
-    public LocalDate getEndate() {
-        return endate;
+    public LocalDate getEndDate() {
+        return endDate;
     }
 
-    public void setEndate(LocalDate endate) {
+    public void setEndDate(LocalDate endDate) {
         // if(endate.isAfter(stD))
-        this.endate = endate;
+        this.endDate = endDate;
     }
 
     public LocalTime getStartTime() {
