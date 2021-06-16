@@ -153,8 +153,7 @@ public class EventService {
             
                 for (Ticket tickets : attend.getTickets()){
                     if (listTickets.contains(tickets)) {
-                        GetTicketByEventDTO dto = new GetTicketByEventDTO();
-                        System.out.println("66666666666666666 PASSEU 000000000000000");    
+                        GetTicketByEventDTO dto = new GetTicketByEventDTO();    
                         dto.setNameAttend(attend.getName());
                         if(tickets.getType().equals(TicketType.FREE)){
                             dto.setTotalSelledFree(dto.getTotalSelledFree()+1);
@@ -293,7 +292,6 @@ public class EventService {
             // }
             
             for (Ticket tickets : attend.getTickets()) {
-                System.out.println("****************** PASSEI CORNO *********************" + tickets.getId());
                 if(deleteDTO.getType().equals(TicketType.FREE)){
 
                     if(attend.getTickets().isEmpty() == false){ 
