@@ -31,11 +31,13 @@ JSON requirement for injection <POST>
     "email": " martin@ig.com", 
     "balance": 5555.44
 }
+    
 { 
     "name": "Ethan",
     "email": "ethan@ig.com", 
     "balance": 5555.44
 }
+    
 { 
     "name": "Mia",
     "email": "mia@ig.com", 
@@ -57,6 +59,7 @@ JSON requirement for injection <POST>
     "amountFreeTickets": 100,
     "priceTicket": 300
 }
+    
 {
     "idAdmin": 3,
     "name": "Casamento ",
@@ -92,11 +95,13 @@ JSON requirement for injection <POST>
     "name": "Salão Redfield",
     "address": "Raccon City - 188"
 }
+    
 {
     "idEvent": 1,
     "name": "Dimetrescu Castle",
     "address": "Romenia - 666"
 }
+    
 {
     "idEvent": 2,
     "name": "Ultra Fest",
@@ -108,10 +113,12 @@ JSON requirement for injection <POST>
     "idAttend": 4,
     "type": "FREE"
 }
+    
 {
     "idAttend": 4,
     "type": "PAID"
 }
+    
 {
     "idAttend": 5,
     "type": "FREE"
