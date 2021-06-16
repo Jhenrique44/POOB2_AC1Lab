@@ -45,41 +45,39 @@ JSON requirement for injection <POST>
 "Event"
 
 { 
-    "idAdmin": 1, 
-    "idPlace": 1,
+    "idAdmin": 2,
     "name": "Rock Festival",
     "descp": "Festival full of old school rock",
     "email": "RockFestival@ig.com",
     "std": "2070-06-21",
-    "endate": "2080-06-29",
+    "endDate": "2080-06-29",
     "startTime": "09:30:00",
     "endTime":  "19:30:00",
     "amountPayTickets": 500,
     "amountFreeTickets": 100,
-    "priceTicket": 100
+    "priceTicket": 300
 }
 {
-    "idAdmin": 1,
-    "idPlace": 1,
+    "idAdmin": 3,
     "name": "Casamento ",
     "descp": "Casamento dos backers",
     "email": "SalãoCas@ig.com",
-    "std": "2023-03-30",
-    "endate": "2023-04-04",
+    "std": "2022-03-30",
+    "endDate": "2030-03-04",
     "startTime": "06:30:00.000",
     "endTime":  "22:30:00.000",
     "amountPayTickets": 50,
     "amountFreeTickets": 100,
     "priceTicket": 50
 }
+
 {
     "idAdmin": 3,
-    "idPlace": 2,
     "name": "Aniversario ",
     "descp": "Aniversario infantil do Ethan",
     "email": "SalãoAni@ig.com",
-    "std": "2024-03-30",
-    "endate": "2024-04-04",
+    "std": "2022-03-30",
+    "endDate": "2030-03-04",
     "startTime": "06:30:00.000",
     "endTime":  "22:30:00.000",
     "amountPayTickets": 0,
@@ -103,4 +101,33 @@ JSON requirement for injection <POST>
     "idEvent": 2,
     "name": "Ultra Fest",
     "address": "Belgium - 111" 
+}
+
+    "TICKETS"
+{
+    "idAttend": 4,
+    "type": "FREE"
+}
+{
+    "idAttend": 4,
+    "type": "PAID"
+}
+{
+    "idAttend": 5,
+    "type": "FREE"
+}
+    
+{
+    "idAttend": 5,
+    "type": "PAID"
+}
+    
+{
+    "idAttend": 6,
+    "type": "FREE"
+}
+    
+{
+    "idAttend": 6,
+    "type": "PAID"
 }
