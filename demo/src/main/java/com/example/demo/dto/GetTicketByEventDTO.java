@@ -1,7 +1,14 @@
 package com.example.demo.dto;
 
+import com.example.demo.entities.TicketType;
 
 public class GetTicketByEventDTO {
+    
+    private Long idTicket;
+
+    private String nameAttend;
+
+    private TicketType type;
     
     private Long totalAmountFree;
 
@@ -15,7 +22,19 @@ public class GetTicketByEventDTO {
 
     }
     
+
+    public GetTicketByEventDTO(Long totalAmountFree, Long totalAmountPayd, Long totalSelledFree, Long totalSelledPayd) {
+        this.totalAmountFree = totalAmountFree;
+        this.totalAmountPayd = totalAmountPayd;
+        this.totalSelledFree = totalSelledFree;
+        this.totalSelledPayd = totalSelledPayd;
+    }
+
+
     public Long getTotalAmountFree() {
+        if(getTotalAmountFree() == null){
+            return 0L;
+        }
         return totalAmountFree;
     }
 
@@ -24,7 +43,11 @@ public class GetTicketByEventDTO {
     }
 
     public Long getTotalAmountPayd() {
+        if(getTotalAmountPayd() == null){
+          return 0L;  
+        }
         return totalAmountPayd;
+        
     }
 
     public void setTotalAmountPayd(Long totalAmountPayd) {
@@ -53,5 +76,34 @@ public class GetTicketByEventDTO {
         this.totalSelledPayd = totalSelledPayd;
     }
 
+
+    public Long getIdTicket() {
+        return idTicket;
+    }
+
+
+    public void setIdTicket(Long idTicket) {
+        this.idTicket = idTicket;
+    }
+
+
+    public String getNameAttend() {
+        return nameAttend;
+    }
+
+
+    public void setNameAttend(String nameAttend) {
+        this.nameAttend = nameAttend;
+    }
+
+
+    public TicketType getType() {
+        return type;
+    }
+
+    public void setType(TicketType type) {
+        this.type = type;
+    }
+    
     
 }

@@ -48,7 +48,6 @@ public class EventDTO {
 
     }
     
-
     public EventDTO(Event event) {
     
         // this.idAdmin = event.getIdAdmin();
@@ -61,9 +60,7 @@ public class EventDTO {
         this.startTime = event.getStartTime();
         this.endTime = event.getEndTime();
 
-
     }
-    
 
     public Long getId() {
         return id;

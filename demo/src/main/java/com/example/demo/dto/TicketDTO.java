@@ -15,15 +15,15 @@ public class TicketDTO {
 
     private Double price;
 
-    private Long idAttend;
+    // private Long idAttend;
 
     public TicketDTO(){
 
     }
 
-    public TicketDTO(Long id, Long idAttend, TicketType type, Instant date, Double price) {
+    public TicketDTO(Long id, TicketType type, Instant date, Double price) {
         this.id = id;
-        this.idAttend = idAttend;
+        // this.idAttend = idAttend;
         this.type = type;
         this.date = date;
         this.price = price;
@@ -70,13 +70,13 @@ public class TicketDTO {
         this.price = price;
     }
 
-    public Long getIdAttend() {
-        return idAttend;
-    }
+    // public Long getIdAttend() {
+    //     return idAttend;
+    // }
 
-    public void setIdAttend(Long idAttend) {
-        this.idAttend = idAttend;
-    }
+    // public void setIdAttend(Long idAttend) {
+    //     this.idAttend = idAttend;
+    // }
 
 
 

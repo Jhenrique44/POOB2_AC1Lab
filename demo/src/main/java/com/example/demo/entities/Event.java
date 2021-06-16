@@ -99,14 +99,14 @@ public class Event implements Serializable{
     // public void setIdAdmin(Long idAdmin) {
     //     this.idAdmin = admin.getId(); //
     // }
-    public Event (Event event){
+    // public Event (Event event){
 
-        this.tickets = event.getTickets();
-    }
-    public Event(List<Place> places, List<Ticket> tickets) {
-        this.places = places;
-        this.tickets = tickets;
-    }
+    //     this.tickets = event.getTickets();
+    // }
+    // public Event(List<Place> places, List<Ticket> tickets) {
+    //     this.places = places;
+    //     this.tickets = tickets;
+    // }
 
     public Long getId() {
         return id;
@@ -226,6 +226,10 @@ public class Event implements Serializable{
         this.tickets.add(ticket);
     }
 
+    public void removeTicket(Ticket ticket){
+        this.tickets.remove(ticket);
+    }
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -250,15 +254,4 @@ public class Event implements Serializable{
             return false;
         return true;
     }
-
-
-    
-    
-    
-
-
-    
-
-
-
 }

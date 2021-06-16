@@ -71,7 +71,7 @@ public class EventService {
     }
     public EventDTO insert(InsertEventDTO insert){
 
-        if (insert.getStd().compareTo(insert.getEndDate()) > 0) {
+        if (insert.getStd().isAfter(insert.getEndDate())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN,"End date must be after the Start date");
         } else {
 
@@ -86,21 +86,6 @@ public class EventService {
             }    
             try {
 
-                // Place p = placeRepository.findById(insert.getIdPlace()).get();
-                // entity.addPlace(p);
-
-                Ticket t = new Ticket();
-                // t.setDate(Instant.now());
-                // t.setType(TicketType.PAID);
-                t.setPrice(entity.getPriceTicket());
-                // if(t.setType(TicketType.PAID) = true){
-                //     t.setPrice(entity.getPriceTicket());
-                // }else{
-                //     t.setPrice(0.0);
-                // }
-                // t.setPrice(entity.getPriceTicket());
-                
-                entity.addTicket(t);
                 entity = repo.save(entity);
                 return new EventDTO(entity);
 
@@ -122,7 +107,6 @@ public class EventService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         
         }
-
     }
 
     public EventDTO update(Long id, UpdateEventDTO updateDTO){
@@ -142,7 +126,7 @@ public class EventService {
                 entity.setStartTime(updateDTO.getStartTime());
                 entity.setEndTime(updateDTO.getEndTime());
                 entity.setAmountFreeTickets(updateDTO.getAmountFreeTickets());
-                entity.setAmountPayTickets(updateDTO.getAmountPaytickets());
+                entity.setAmountPayTickets(updateDTO.getAmountPayTickets());
     
                 entity = repo.save(entity);
     
@@ -155,23 +139,56 @@ public class EventService {
     }
 
     //Requisição  GET /{idEvent}/tickets 
-    public GetTicketByEventDTO getTicketEventById(Long id){
+    public List<GetTicketByEventDTO> getTicketEventById(Long id){
         Optional<Event> op = repo.findById(id);
         Event event = op.orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found"));
-        GetTicketByEventDTO dto = new GetTicketByEventDTO(); 
+        // GetTicketByEventDTO dto = new GetTicketByEventDTO(); 
         
-        for (Ticket ticket : event.getTickets()) {
-            if (ticket.getType().equals(TicketType.FREE)) {
-                dto.setTotalSelledFree(dto.getTotalSelledFree()+1);
-            } else {
-                dto.setTotalSelledPayd(dto.getTotalSelledPayd()+1);
+        List<GetTicketByEventDTO> listdto = new ArrayList<>();
+        List<Attend> listAttend = new ArrayList<>();
+        List<Ticket> listTickets = event.getTickets();
+        listAttend = attendeeRepository.findAll();
+        try {
+            for (Attend attend : listAttend){
+            
+                for (Ticket tickets : attend.getTickets()){
+                    if (listTickets.contains(tickets)) {
+                        GetTicketByEventDTO dto = new GetTicketByEventDTO();
+                        System.out.println("66666666666666666 PASSEU 000000000000000");    
+                        dto.setNameAttend(attend.getName());
+                        if(tickets.getType().equals(TicketType.FREE)){
+                            dto.setTotalSelledFree(dto.getTotalSelledFree()+1);
+                        }else{
+                            dto.setTotalSelledPayd(dto.getTotalSelledPayd()+1);
+                        }
+                        dto.setTotalAmountFree(dto.getTotalAmountFree() + event.getAmountFreeTickets());
+                        dto.setTotalAmountPayd(dto.getTotalAmountPayd() + event.getAmountPayTickets());
+                        dto.setType(tickets.getType());
+                        listdto.add(dto);
+                    } else {
+                            
+                    }
+                }
             }
+    
+        } catch (Exception e) {
+            System.out.println("Error parça");
         }
+        return listdto;
+        
+        // for (Ticket tickets : event.getTickets()) {
+        //     if (tickets.getType().equals(TicketType.FREE)) {
+        //         dto.setTotalSelledFree(dto.getTotalSelledFree()+1);
+        //     } else {
+        //         dto.setTotalSelledPayd(dto.getTotalSelledPayd()+1);
+        //     }
+        // }
+        // dto.setTotalAmountFree(event.getAmountFreeTickets());
+        // dto.setTotalAmountPayd(event.getAmountPayTickets());
+        // dto.setTotalAmountFree(dto.getTotalSelledFree() + event.getAmountFreeTickets());
+        // dto.setTotalAmountPayd(dto.getTotalAmountPayd() + event.getAmountPayTickets());
 
-        dto.setTotalAmountFree(dto.getTotalSelledFree() + event.getAmountFreeTickets());
-        dto.setTotalAmountPayd(dto.getTotalAmountPayd() + event.getAmountPayTickets());
-
-        return dto;
+        // return dto;
 
     }
     //Requisição POST /{idevent}/tickets
@@ -181,33 +198,154 @@ public class EventService {
         try {
                 
             Event e = repo.findById(idEvent).get();
-            // ticketRepository.findById(insertTicketDTO.getIdAttend()).get();
-                    
-            e.addTicket(entity);
-
-            entity = ticketRepository.save(entity);
+            Optional<Attend> op = attendeeRepository.findById(insertTicketDTO.getIdAttend());
+            Attend attend = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Attend not found"));
             
+            // if(insertTicketDTO.getType() == TicketType.FREE){
+            //     e.setAmountFreeTickets(e.getAmountFreeTickets()-1);
+            //     entity.setPrice(0.0);
+            // }else{
+            //     e.setAmountPayTickets(e.getAmountPayTickets()-1);
+            //     entity.setPrice(e.getPriceTicket());
+            // }
+            // // || insertTicketDTO.getType().equals(TicketType.FREE)
+            // if(attend.getBalance() > e.getPriceTicket()){
+            //     if(insertTicketDTO.getType().equals(TicketType.FREE)){
+            //         attend.addTickets(entity);
+            //         entity.setDate(Instant.now());
+            //         e.addTicket(entity);
+            //         entity = ticketRepository.save(entity);
 
-            return new TicketDTO(entity);
-        
+            //         return new TicketDTO(entity);
+            //     }else{
+            //         attend.addTickets(entity);
+            //         entity.setDate(Instant.now());
+            //         e.addTicket(entity);
+            //         entity = ticketRepository.save(entity);
+                    
+            //         return new TicketDTO(entity);
+            //     }
+            //     // return new TicketDTO(entity);
+            // }else{
+            //     throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Saldo Insuficiente");
+            // }
+            if (insertTicketDTO.getType().equals(TicketType.PAID)) {
+                
+                if (attend.getBalance() > e.getPriceTicket()) {
+                    
+                    entity.setPrice(e.getPriceTicket());
+                    entity.setDate(Instant.now());
+                    attend.setBalance(attend.getBalance() - entity.getPrice());
+                    attend.addTickets(entity);
+                    e.addTicket(entity);
+                    
+                    if(e.getAmountPayTickets() != 0){
+                        e.setAmountPayTickets((e.getAmountPayTickets()) - 1);
+                    }else{
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Invalid Ticket (Sold out)");
+                    }
+
+                    entity = ticketRepository.save(entity);
+                    return new TicketDTO(entity);
+
+                } else {
+                    throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Insuficient Balance for Buy");
+                }
+
+            } else {
+
+                entity.setPrice(0.0);
+                attend.addTickets(entity);
+                entity.setDate(Instant.now());
+                e.addTicket(entity);
+
+               if(e.getAmountFreeTickets() != 0){
+                    e.setAmountFreeTickets((e.getAmountFreeTickets()) - 1);
+                }else{
+                   throw new ResponseStatusException(HttpStatus.FORBIDDEN,"Invalid Ticket (Sold out)");
+                }    
+                
+                entity = ticketRepository.save(entity);
+                return new TicketDTO(entity);
+            }
+
         } catch (NoSuchElementException r) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "idEvent not Found");
         }
 
-
-
     }
+
     // DELETE /{idEvent}/tickets
-    public void deleteTicket(Long idEvent){
+    public void deleteTicket(Long idEvent, InsertTicketDTO deleteDTO){
 
-        try {
+        // Ticket entity = new Ticket(deleteDTO);
+        Optional<Attend> op = attendeeRepository.findById(deleteDTO.getIdAttend());
+        Attend attend = op.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Attend not found"));
             
-            Event e = repo.findById(idEvent).get();
+        try {
+        Event e = repo.findById(idEvent).get();
+            
 
-            ticketRepository.deleteAll(e.getTickets());
+            // for (Ticket tickets : attend.getTickets()) {
+                
+            //     attend.removeTicket(tickets);
+            //     ticketRepository.deleteById(tickets.getId());
+            // }
+            
+            for (Ticket tickets : attend.getTickets()) {
+                System.out.println("****************** PASSEI CORNO *********************" + tickets.getId());
+                if(deleteDTO.getType().equals(TicketType.FREE)){
+
+                    if(attend.getTickets().isEmpty() == false){ 
+                    // || tickets.getId().equals(null)){
+                        
+                        if(tickets.getType().equals(TicketType.FREE)){
+                            e.setAmountFreeTickets(e.getAmountFreeTickets()+1);
+                            attend.removeTicket(tickets);
+                            ticketRepository.deleteById(tickets.getId());    
+                        }else{
+                            throw new ResponseStatusException(HttpStatus.FORBIDDEN,"don't have any FREE tickets to devolve");
+                        }
+                        
+                    }
+                    else{
+                        throw new ResponseStatusException(HttpStatus.FORBIDDEN,"don't have tickets anymore");
+                    }
+                }else{
+                         
+                    e.setAmountPayTickets(e.getAmountPayTickets()+1);
+                    attend.setBalance(attend.getBalance() + e.getPriceTicket());
+                    attend.removeTicket(tickets);
+                    ticketRepository.deleteById(tickets.getId());
+                         
+                } 
+            }
+            // for (Ticket tickets : attend.getTickets()) {
+                
+            //     for (Ticket ticketsE : e.getTickets()) {
+                    
+            //         if(deleteDTO.getType().equals(TicketType.FREE)){
+
+            //             if((tickets.getType().equals(TicketType.FREE) && ticketsE.getType().equals(TicketType.FREE))){
+
+            //                 attend.removeTicket(tickets);
+            //                 ticketRepository.deleteById(tickets.getId());
+            //                 ticketRepository.deleteById(ticketsE.getId());
+            //             }else{
+            //                 throw new ResponseStatusException(HttpStatus.FORBIDDEN,"don't have any FREE tickets to sell back");
+            //             }
+
+            //         }else{
+
+            //         }
 
 
-        } catch (EmptyResultDataAccessException e) {
+
+            //     }
+            // }
+
+            
+        } catch (NoSuchElementException r) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Event not found");
         }
 
@@ -270,7 +408,10 @@ public class EventService {
                     
                     // placeRepository.deleteAll(e.getPlaces());
                     // placeRepository.deleteInBatch(e.getPlaces());
-                    p.getEvents().clear();
+                    // p.getEvents().clear();
+                    p.removeEvent(e);
+
+                    placeRepository.save(p);
 
                     // repo.deleteAll(p.getEvents());
                     

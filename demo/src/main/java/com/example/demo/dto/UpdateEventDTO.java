@@ -18,7 +18,7 @@ public class UpdateEventDTO {
     private LocalTime startTime;
     private LocalTime endTime;
     private Long amountFreeTickets;
-    private Long amountPaytickets;
+    private Long amountPayTickets;
 
     public String getName() {
         return name;
@@ -62,11 +62,11 @@ public class UpdateEventDTO {
     public void setAmountFreeTickets(Long amountFreeTickets) {
         this.amountFreeTickets = amountFreeTickets;
     }
-    public Long getAmountPaytickets() {
-        return amountPaytickets;
+    public Long getAmountPayTickets() {
+        return amountPayTickets;
     }
-    public void setAmountPaytickets(Long amountPaytickets) {
-        this.amountPaytickets = amountPaytickets;
+    public void setAmountPaytickets(Long amountPayTickets) {
+        this.amountPayTickets = amountPayTickets;
     }
         
     

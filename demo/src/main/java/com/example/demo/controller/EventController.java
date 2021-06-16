@@ -108,10 +108,11 @@ public class EventController {
     // }
 
     @GetMapping("{id}/ticketsInfo")
-    public GetTicketByEventDTO getTicketsInfo(@PathVariable Long id){
+    public ResponseEntity<List<GetTicketByEventDTO>> getTicketsInfo(@PathVariable Long id){
 
-        return service.getTicketEventById(id);
+        List <GetTicketByEventDTO> dto = service.getTicketEventById(id);
 
+        return ResponseEntity.ok().body(dto);
     }
 
 
@@ -138,7 +139,7 @@ public class EventController {
 
     
 
-    @PostMapping("{id}/tickets")
+    @PostMapping("{idEvent}/tickets")
     public ResponseEntity<TicketDTO> insertTicket(@PathVariable Long idEvent, @RequestBody InsertTicketDTO insertDTO){
     
         TicketDTO dto = service.insertTicket(insertDTO, idEvent);
@@ -150,10 +151,11 @@ public class EventController {
 
     }
 
-    @DeleteMapping("{id}/tickets")
-    public ResponseEntity<Void> deleteTicket(@PathVariable Long idEvent){
+    @DeleteMapping("{idEvent}/tickets")
+    public ResponseEntity<Void> deleteTicket(@PathVariable Long idEvent, @RequestBody InsertTicketDTO deleteDTO){
 
-        service.deleteTicket(idEvent);
+        service.deleteTicket(idEvent, deleteDTO);
+
         return ResponseEntity.noContent().build();
 
     }
