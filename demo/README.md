@@ -4,7 +4,7 @@
 
 JSON requirement for injection <POST>
     
-"Admins"
+    "Admins"
 
 { 
     "name": "Jojis",
@@ -24,7 +24,7 @@ JSON requirement for injection <POST>
     "phoneNumber": "9999-4445"
 }
 
-"Attendees"
+    "Attendees"
 
 { 
     "name": "Martin",
@@ -42,7 +42,7 @@ JSON requirement for injection <POST>
     "balance": 100.44
 }
 
-"Event"
+    "Event"
 
 { 
     "idAdmin": 2,
@@ -85,7 +85,7 @@ JSON requirement for injection <POST>
     "priceTicket": 50
 }
 
-"PLACES"
+    "PLACES"
 
 {
     "idEvent": 1,
